@@ -1,0 +1,12 @@
+{
+  "name": "invitationtoremininsce",
+  "version": "1.0.0",
+  "description": "![inter_cover](https://github.com/PNU-DT-2023/InvitationToRemininsce/assets/61951603/15787261-3a30-4c8d-9405-4ca66b665814)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
