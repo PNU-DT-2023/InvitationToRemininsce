@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #101224;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    z-index: 4;
+}
+
+.world-map {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1em;
+    position: relative;
+}
+
+.world-map img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.title {
+    text-align: center;
+    color: #fff;
+    margin: 2em 0;
+    padding: 0 1em;
+}
+
+.title p {
+    max-width: 500px;
+    margin : 1em auto;
+    line-height: 27px;
+}
+
+.pin {
+    background: #4362f8;
+    position: absolute;
+    width: 0.7em;
+    height: 0.7em;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.pin::before {
+    content: '';
+    background: #4362f8;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: pulse 1.3s ease-in-out infinite;
+}
+
+.pin span {
+    display: inline-block;
+    white-space: nowrap;
+    position: absolute;
+    left: 1.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border-radius: 3em;
+    padding: 0.4em 0.6em;
+    font-size: 0.9em;
+}
+
+.pnu {
+    top: 40%;
+    left: 58%;
+}
+
+.Gwangalli {
+    top: 64%;
+    left: 62%;
+}
+
+.Yongdusan {
+    top: 76%;
+    left: 48%;
+}
+
+.park {
+    top: 60%;
+    left: 48%;
+}
+
+.Jagalchi {
+    top: 80%;
+    left: 46%;
+}
+
+@keyframes pulse {
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(2.5);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .world-map {
+        font-size: 13px;
+    }
+}
+  #menu div {
+    position: relative;
+    display: inline-block;
+  }
+
+.arrow_box {
+    display: none;
+    position: relative;
+    width: 300px;
+    padding: 8px;
+    left: -145px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #fff;
+    font-size: 14px;
+    z-index : 99;
+  }
+
+.arrow_box::after {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -10px;
+    border: solid transparent;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #ffffff;
+    border-width: 10px;
+    pointer-events: none;
+    content: ' ';
+    z-index : 99;
+}
+
+span:hover + p.arrow_box {
+    display: block;
+}
