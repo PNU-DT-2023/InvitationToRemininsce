@@ -34,15 +34,32 @@
     cursor: pointer;
     background-color: #ff00ff;
     outline: 2px solid #000;
+
 }
 
-/* 퍼즐이 정확한 위치에 들어갔을 경우 뜨는 애니메이션 */
+/* 정위치에 스냅되었을 경우 페이드아웃 */
+.puzzle-piece.rightplace{
+    /* outline-color: #fff; */
+    animation-name: fadeout;
+    animation-duration: 0.5s;
+    /* animation-delay: -0.5s; */
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+    0% {outline-color: #000;}
+    /* 50%{outline-color: transparent;} */
+    100% {outline-color: transparent;}
+}
+
+
+/* 퍼즐이 스냅된 경우 뜨는 애니메이션 */
 .puzzle-piece.snap{
     animation: blink 0.5s;
 }
 
 @keyframes blink{
-    20% { outline-color: #fff; }
+    20% {outline-color: #fff; }
     50% {outline-color: #fff;}
 }
 
