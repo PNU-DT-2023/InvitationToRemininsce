@@ -1,0 +1,122 @@
+/* --- puzzle --- */
+
+/* 배경이미지(크기지정 필요, 퍼즐에 쓸 이미지랑 크기 같아야함) */
+#image-now {
+    position: fixed;
+    top: 0; left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#image-now img {
+    position: absolute;
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
+}
+
+
+/* 퍼즐조각들이 돌아다닐 공간(화면크기) */
+#puzzle {
+    position: fixed;
+    top: 0; left: 0;
+}
+
+/* 퍼즐조각 */
+.puzzle-piece{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    cursor: pointer;
+    background-color: #ff00ff;
+    outline: 2px solid #000;
+
+}
+
+/* 정위치에 스냅되었을 경우 페이드아웃 */
+.puzzle-piece.rightplace{
+    /* outline-color: #fff; */
+    animation-name: fadeout;
+    animation-duration: 0.5s;
+    /* animation-delay: -0.5s; */
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+    0% {outline-color: #000;}
+    /* 50%{outline-color: transparent;} */
+    100% {outline-color: transparent;}
+}
+
+
+/* 퍼즐이 스냅된 경우 뜨는 애니메이션 */
+.puzzle-piece.snap{
+    animation: blink 0.5s;
+}
+
+@keyframes blink{
+    20% {outline-color: #fff; }
+    50% {outline-color: #fff;}
+}
+
+#puzzle-board{
+    top: 0;
+    left: 0;
+    z-index: -99;
+    position: absolute;
+    visibility: hidden;
+
+}
+
+.puzzle-position{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    outline: 1px solid #000;
+}
+
+#puzzle-complete{
+    position: fixed;
+    width: 400px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    font-family: 'gulim';
+    font-size: 20pt;
+    color: #fff;
+    background: #000;
+    
+
+}
+
+#puzzle-complete.active{
+    visibility: visible;
+    opacity: 1;
+    transition: .6s;
+}
+
+/* 개발자용 버튼 */
+#puzzle-solve{
+    font-family: 'Gulim';
+    font-size: 20pt;
+    padding-block: 8px;
+    padding-inline: 12px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 100px;
+}
+
+#puzzle-solve:active{
+    color: #fff;
+    background-color: #000;
+}
