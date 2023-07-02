@@ -1,9 +1,15 @@
 /* --- puzzle --- */
 
+* {
+    font-family: 'pretendard';
+    touch-action: none;
+}
+
 /* 배경이미지(크기지정 필요, 퍼즐에 쓸 이미지랑 크기 같아야함) */
 #image-now {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
     z-index: -99;
@@ -23,22 +29,22 @@
 /* 퍼즐조각들이 돌아다닐 공간(화면크기) */
 #puzzle {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
 }
 
 /* 퍼즐조각 */
-.puzzle-piece{
+.puzzle-piece {
     width: 100px;
     height: 100px;
     position: absolute;
     cursor: pointer;
     background-color: #ff00ff;
     outline: 2px solid #000;
-
 }
 
 /* 정위치에 스냅되었을 경우 페이드아웃 */
-.puzzle-piece.rightplace{
+.puzzle-piece.rightplace {
     /* outline-color: #fff; */
     animation-name: fadeout;
     animation-duration: 0.5s;
@@ -47,23 +53,33 @@
 }
 
 @keyframes fadeout {
-    0% {outline-color: #000;}
+    0% {
+        outline-color: #000;
+    }
+
     /* 50%{outline-color: transparent;} */
-    100% {outline-color: transparent;}
+    100% {
+        outline-color: transparent;
+    }
 }
 
 
 /* 퍼즐이 스냅된 경우 뜨는 애니메이션 */
-.puzzle-piece.snap{
+.puzzle-piece.snap {
     animation: blink 0.5s;
 }
 
-@keyframes blink{
-    20% {outline-color: #fff; }
-    50% {outline-color: #fff;}
+@keyframes blink {
+    20% {
+        outline-color: #fff;
+    }
+
+    50% {
+        outline-color: #fff;
+    }
 }
 
-#puzzle-board{
+#puzzle-board {
     top: 0;
     left: 0;
     z-index: -99;
@@ -72,14 +88,111 @@
 
 }
 
-.puzzle-position{
+.puzzle-position {
     position: absolute;
     width: 100px;
     height: 100px;
     outline: 1px solid #000;
 }
 
-#puzzle-complete{
+
+/* --- 진행도 표시 --- */
+#progress-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: fit-content;
+    height: 50px;
+    background-color: beige;
+}
+
+/* 숫자 형식 */
+#progress-number {
+    display: none;
+    width: 200px;
+    font-size: 20pt;
+    padding: 10px;
+    text-align: center;
+}
+
+/* 바 형식 */
+#progress-subway{
+    /* display: none; */
+    width: 800px;
+}
+
+#bar-container{
+    position: relative;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 500px;
+    height: 20px;
+    background-color: #ddd;
+    /* overflow: hidden; */
+}
+
+.spot{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 5px solid #ddd;
+    z-index: 50;
+    transition: 0.5s ease;
+}
+#left{
+    left: 0;
+}
+#right{
+    left: 100%;
+}
+
+.here{
+    border: 10px solid #9d4;
+}
+
+.station{
+    position: absolute;
+    font-size: 16pt;
+    transform: translate(50%, -50%);
+    top: 50%;
+}
+#now{
+    left: -100px;
+}
+#past{
+    left: 500px;
+}
+
+#subway{
+    text-align: center;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 25px;
+    background-color: #fd3;
+    left: 0;
+    top: -20px;
+    transition: 0.5s ease;
+}
+
+#progress-bar{
+    width: 0%;
+    height: 100%;
+    background-color: #9D4;
+    transition: width 0.5s ease;
+}
+
+
+/* --- 개발자용 --- */
+
+/* 완성된 경우 메시지박스(임시) */
+#puzzle-complete {
     position: fixed;
     width: 400px;
     height: 100px;
@@ -91,23 +204,21 @@
     opacity: 0;
     justify-content: center;
     align-items: center;
-    font-family: 'gulim';
     font-size: 20pt;
     color: #fff;
     background: #000;
-    
+
 
 }
 
-#puzzle-complete.active{
+#puzzle-complete.active {
     visibility: visible;
     opacity: 1;
     transition: .6s;
 }
 
-/* 개발자용 버튼 */
-#puzzle-solve{
-    font-family: 'Gulim';
+/* 한방에완성 버튼 */
+#puzzle-solve {
     font-size: 20pt;
     padding-block: 8px;
     padding-inline: 12px;
@@ -116,7 +227,8 @@
     border-radius: 100px;
 }
 
-#puzzle-solve:active{
+#puzzle-solve:active {
     color: #fff;
     background-color: #000;
 }
+
