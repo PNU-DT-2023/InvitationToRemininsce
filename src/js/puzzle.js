@@ -209,20 +209,3 @@ image.addEventListener('load', function () {
 });
 
 
-
-
-
-container.addEventListener('mousemove', tiltImage);
-
-function tiltImage(event) {
-    
-    const xAxis = (window.innerWidth / 2 - event.clientX)*0.01 ;
-    const yAxis = (window.innerHeight / 2 - event.clientY)*0.01 ;
-    img.style.transform = `translate(-${50}%, -50%) skew(${xAxis}deg, ${yAxis}deg)`;
-}
-  
-imgContainer.addEventListener('mouseout', resetTilt);
-
-function resetTilt() {
-    img.style.transform = 'translate(-50%, -50%) skew(0)';
-}
