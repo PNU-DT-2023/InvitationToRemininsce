@@ -118,7 +118,8 @@ image.addEventListener('load', function () {
       if (completed.size == puzzlePieces.length) {
         setTimeout(() => {
           document.getElementById('puzzle-complete').setAttribute("class", "active");
-        }, 1000);
+          location.href = '/ending.html';
+        }, 1);
       }
     });
   });
@@ -170,3 +171,22 @@ image.addEventListener('load', function () {
   }
 
 });
+
+
+
+
+
+container.addEventListener('mousemove', tiltImage);
+
+function tiltImage(event) {
+    
+    const xAxis = (window.innerWidth / 2 - event.clientX)*0.01 ;
+    const yAxis = (window.innerHeight / 2 - event.clientY)*0.01 ;
+    img.style.transform = `translate(-${50}%, -50%) skew(${xAxis}deg, ${yAxis}deg)`;
+}
+  
+imgContainer.addEventListener('mouseout', resetTilt);
+
+function resetTilt() {
+    img.style.transform = 'translate(-50%, -50%) skew(0)';
+}
