@@ -4,8 +4,15 @@ image.src = 'src/img/puzzlesample-past-1.jpg'
 var activePiece = null;
 var offset = { x: 0, y: 0 };
 var snapOffset = 20;
+var pieceRow = 4;
+var pieceColumn = 3;
 
 var solveButton = document.getElementById('puzzle-solve');
+var progressNum = document.getElementById('progress-text');
+var progressBar = document.getElementById('progress-bar');
+var spotLeft = document.getElementById('left');
+var spotRight = document.getElementById('right');
+var subway = document.getElementById('subway');
 
 //이미지 잘라서 퍼즐조각 만드는 코드(직사각형)
 image.addEventListener('load', function () {
@@ -19,12 +26,13 @@ image.addEventListener('load', function () {
   var heighstZIndex = 10;
   var boardZIndex = -99;
 
-  var pieceWidth = image.width / 4;
-  var pieceHeight = image.height / 3;
+  var pieceWidth = image.width / pieceRow;
+  var pieceHeight = image.height / pieceColumn;
 
+  var status = 0;
 
-  for (var i = 0; i < 3; i++) {
-    for (var j = 0; j < 4; j++) {
+  for (var i = 0; i < pieceColumn; i++) {
+    for (var j = 0; j < pieceRow; j++) {
 
       //이미지 자르기 (챗지피티이용)
       var canvas = document.createElement('canvas');
@@ -45,7 +53,7 @@ image.addEventListener('load', function () {
 
       //퍼즐조각 동적 추가
       var piece = document.createElement('div');
-      piece.id = 'piece' + (i * 3 + j);
+      piece.id = 'piece' + (i * pieceColumn + j);
       piece.className = 'puzzle-piece';
       piece.style.width = pieceWidth + 'px';
       piece.style.height = pieceHeight + 'px';
@@ -59,7 +67,7 @@ image.addEventListener('load', function () {
 
       //퍼즐조각이 들어갈 위치(퍼즐판) 동적 추가
       var position = document.createElement('div');
-      position.id = 'position' + (i * 3 + j);
+      position.id = 'position' + (i * pieceColumn + j);
       position.className = 'puzzle-position';
       position.style.top = boardTop + pieceHeight * i + 'px';
       position.style.left = boardLeft + pieceWidth * j + 'px';
@@ -74,24 +82,34 @@ image.addEventListener('load', function () {
   }
 
   // 드래그 드랍 코드
+  // 터치스크린 대응 추가
   puzzlePieces.forEach(function (piece, pieceIdx) {
-    piece.addEventListener('mousedown', function (e) {
+    function handleMouseDown(e){
+      e.preventDefault();
       if (!completed.has(pieceIdx)) {
         piece.style.zIndex = heighstZIndex++;
         activePiece = piece;
-        offset.x = e.clientX - piece.offsetLeft;
-        offset.y = e.clientY - piece.offsetTop;
+        const startX = e.clientX || e.touches[0].clientX;
+        const startY = e.clientY || e.touches[0].clientY;
+        offset.x = startX - piece.offsetLeft;
+        offset.y = startY - piece.offsetTop;
       }
-    });
+    }
 
-    document.addEventListener('mousemove', function (e) {
+    function handleMouseMove(e){
+      e.preventDefault();
       if (activePiece == piece) {
-        piece.style.left = e.clientX - offset.x + 'px';
-        piece.style.top = e.clientY - offset.y + 'px';
-      }
-    });
+        const currentX = e.clientX || e.touches[0].clientX;
+        const currentY = e.clientY || e.touches[0].clientY;
 
-    piece.addEventListener('mouseup', function (e) {
+
+        piece.style.left = currentX - offset.x + 'px';
+        piece.style.top = currentY - offset.y + 'px';
+      }
+    }
+
+    function handleMouseUp(e){
+      e.preventDefault();
       activePiece = null;
 
       //스냅 (mouseup에서 판정)
@@ -113,6 +131,16 @@ image.addEventListener('load', function () {
         }
       });
 
+
+      status = parseInt(completed.size / (puzzlePieces.length) * 100);
+      progressNum.textContent = status + '%';
+
+      progressBar.style.width = status + '%';
+      subway.style.left = status + '%';
+      if(status!= 0){ spotLeft.classList.remove("here") }
+      if(status == 100){ spotRight.classList.add("here"); }
+
+
       //모든 퍼즐 조각이 완성 (mouseup에서 판정)
       //메시지 띄우기(임시)
       if (completed.size == puzzlePieces.length) {
@@ -121,7 +149,15 @@ image.addEventListener('load', function () {
           location.href = '/ending.html';
         }, 1);
       }
-    });
+    }
+
+    piece.addEventListener('mousedown', handleMouseDown);
+    piece.addEventListener('touchstart', handleMouseDown);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('touchmove', handleMouseMove);
+    piece.addEventListener('mouseup', handleMouseUp);
+    piece.addEventListener('touchend', handleMouseUp);
+
   });
 
   solveButton.addEventListener("click", solvePuzzle);
@@ -147,7 +183,7 @@ image.addEventListener('load', function () {
 
         if ( //사진 안쪽이 아닐때 while문 탈출
           randX < boardLeft - shuffleOffsetX || randX > boardLeft + image.width - shuffleOffsetX ||
-          randY < boardTop - shuffleOffsetY || randY > boardTop + image.height - shuffleOffsetY
+          randY < boardTop - shuffleOffsetY || randY > window.innerHeight
         ) { isInside = false }
       }
 

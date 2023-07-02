@@ -4,11 +4,11 @@
 <!-- <script src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"></script> -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/css/puzzle-style.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/css/puzzle-style.css">
+  <title>Document</title>
 </head>
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -16,17 +16,34 @@
     <img src="src/img/puzzlesample-now-1.jpg" alt="">
   </div>
 
-  
   <div id="puzzle"> </div>
 
   <div id="puzzle-board"> </div>
 
+  <!-- 진행도 -->
+  <div id="progress-container">
+    <div id="progress-number">
+      <span>완성까지 </span>
+      <span id="progress-text"> 0% </span>
+    </div>
+
+    <div id="progress-subway">
+      <div id="bar-container">
+        <div class="station" id="now">2023</div>
+        <div class="station" id="past">2008</div>
+        <div class="spot here" id="left"></div>
+        <div class="spot" id="right"></div>
+        <div id="subway">차예용</div>
+        <div id="progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 개발자용 -->
   <button id="puzzle-solve">한방에완성시키기</button>
-
-
   <div class="" id="puzzle-complete">
     퍼즐 완성!
   </div>
-  <script defer src="src/js/puzzle.js"></script>
+  <script src="src/js/puzzle.js"></script>
 
-<body/>
+  <body />
