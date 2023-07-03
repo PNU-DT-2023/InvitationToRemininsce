@@ -146,7 +146,7 @@ image.addEventListener('load', function () {
       if (completed.size == puzzlePieces.length) {
         setTimeout(() => {
           document.getElementById('puzzle-complete').setAttribute("class", "active");
-          location.href = '/ending.html';
+          location.href = './ending.html';
         }, 1);
       }
     }
