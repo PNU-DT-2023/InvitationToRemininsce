@@ -5,24 +5,23 @@
     touch-action: none;
 }
 
-/* 배경이미지(크기지정 필요, 퍼즐에 쓸 이미지랑 크기 같아야함) */
+/* 배경이미지*/
 #image-now {
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 75vh;
+    width: calc(75vh*4/3);
+    overflow: hidden;
     z-index: -99;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #image-now img {
     position: absolute;
-    /* top: 50%;
-    left: 50%; */
-    /* transform: translate(-50%, -50%); */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
