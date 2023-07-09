@@ -5,24 +5,75 @@
     touch-action: none;
 }
 
-/* 배경이미지(크기지정 필요, 퍼즐에 쓸 이미지랑 크기 같아야함) */
+/* 타이틀 */
+.title-container {
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 16px;
+    font-size: 28pt;
+    width: calc(70vh*4/3);
+    text-align: center;
+}
+
+.fix-word{
+    padding-right: 8px;
+}
+
+.prev-word {
+    position: absolute;
+    /* display: inline-block; */
+    animation: shrinkAnimation 1s 2s forwards;
+    transform-origin: bottom;
+}
+
+.next-word {
+    position: absolute;
+    display: inline-block;
+    transform: scaleY(0);
+    animation: appearAnimation 1s 2s forwards;
+    transform-origin: top;
+}
+
+
+@keyframes shrinkAnimation {
+    0% {
+        transform: scaleY(1);
+    }
+
+    100% {
+        transform: scaleY(0);
+    }
+}
+
+@keyframes appearAnimation {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+/* 배경이미지*/
 #image-now {
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 70vh;
+    width: calc(70vh*4/3);
+    overflow: hidden;
     z-index: -99;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #image-now img {
     position: absolute;
-    /* top: 50%;
-    left: 50%; */
-    /* transform: translate(-50%, -50%); */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
@@ -99,12 +150,13 @@
 /* --- 진행도 표시 --- */
 #progress-container {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     left: 50%;
     transform: translate(-50%, 0);
-    width: fit-content;
+    width: calc(70vh*4/3);
     height: 50px;
-    background-color: beige;
+    /* background-color: cyan; */
+    z-index: -1;
 }
 
 /* 숫자 형식 */
@@ -118,16 +170,16 @@
 
 /* 바 형식 */
 #progress-subway{
-    /* display: none; */
-    width: 800px;
+    width: 100%;
+    height: 100%;
 }
 
 #bar-container{
     position: relative;
-    top: 20px;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, 0);
-    width: 500px;
+    transform: translate(-50%, -50%);
+    width: calc(70vh*4/3 - 140px);
     height: 20px;
     background-color: #ddd;
     /* overflow: hidden; */
@@ -153,38 +205,41 @@
 }
 
 .here{
-    border: 10px solid #9d4;
+    border: 10px solid #FFAD33;
 }
 
 .station{
     position: absolute;
     font-size: 16pt;
-    transform: translate(50%, -50%);
+    transform: translate(0, -50%);
     top: 50%;
 }
 #now{
-    left: -100px;
+    left: 0;
 }
 #past{
-    left: 500px;
+    right: 0;
 }
 
 #subway{
-    text-align: center;
+    background-image: url(../img/car.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     position: absolute;
     transform: translate(-50%, -50%);
     width: 70px;
-    height: 25px;
-    background-color: #fd3;
-    left: 0;
-    top: -20px;
+    height: 36px;
+    /* left: 0; */
+    bottom: 0;
     transition: 0.5s ease;
+    z-index: 51;
 }
 
 #progress-bar{
     width: 0%;
     height: 100%;
-    background-color: #9D4;
+    background-color: #FFAD33;
     transition: width 0.5s ease;
 }
 

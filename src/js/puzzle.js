@@ -1,5 +1,5 @@
 var image = new Image();
-image.src = 'src/img/puzzlesample-past-1.jpg'
+image.src = 'src/img/puzzlesample-past-wide.jpg';
 
 var activePiece = null;
 var offset = { x: 0, y: 0 };
@@ -16,8 +16,16 @@ var subway = document.getElementById('subway');
 
 //이미지 잘라서 퍼즐조각 만드는 코드(직사각형)
 image.addEventListener('load', function () {
-  var boardTop = (window.innerHeight - image.height) / 2;
-  var boardLeft = (window.innerWidth - image.width) / 2;
+
+  const backgroundImage = document.getElementById('image-now');
+  const backgroundSize = window.getComputedStyle(backgroundImage);
+  const width = parseInt(backgroundSize.getPropertyValue('width'), 10);
+  const height = parseInt(backgroundSize.getPropertyValue('height'), 10);
+  const bezelWidth = (image.width - width) / 2;
+  const bezelHeight = (image.height - height) / 2;
+
+  var boardTop = (window.innerHeight - height) / 2;
+  var boardLeft = (window.innerWidth - width) / 2;
   var puzzleContainer = document.getElementById('puzzle');
   var puzzleBoard = document.getElementById('puzzle-board');
   var puzzlePieces = [];
@@ -26,23 +34,23 @@ image.addEventListener('load', function () {
   var heighstZIndex = 10;
   var boardZIndex = -99;
 
-  var pieceWidth = image.width / pieceRow;
-  var pieceHeight = image.height / pieceColumn;
+  var pieceWidth = width / pieceRow;
+  var pieceHeight = height / pieceColumn;
 
   var status = 0;
 
   for (var i = 0; i < pieceColumn; i++) {
     for (var j = 0; j < pieceRow; j++) {
 
-      //이미지 자르기 (챗지피티이용)
+      //이미지 자르기
       var canvas = document.createElement('canvas');
       canvas.width = pieceWidth;
       canvas.height = pieceHeight;
       var context = canvas.getContext('2d');
       context.drawImage(
         image,
-        j * pieceWidth,
-        i * pieceHeight,
+        j * pieceWidth + bezelWidth,
+        i * pieceHeight + bezelHeight,
         pieceWidth,
         pieceHeight,
         0,
@@ -126,7 +134,7 @@ image.addEventListener('load', function () {
             piece.classList.add("rightplace");
             completed.add(pieceIdx);
             piece.style.cursor = 'default';
-            piece.style.zIndex = boardZIndex++;
+            piece.style.zIndex = boardZIndex--;
           }
         }
       });
@@ -147,7 +155,8 @@ image.addEventListener('load', function () {
         setTimeout(() => {
           document.getElementById('puzzle-complete').setAttribute("class", "active");
           location.href = './ending.html';
-        }, 1);
+        }, 1000);
+
       }
     }
 
@@ -182,8 +191,8 @@ image.addEventListener('load', function () {
         randY = Math.floor(Math.random() * (window.innerHeight - shuffleOffsetY));
 
         if ( //사진 안쪽이 아닐때 while문 탈출
-          randX < boardLeft - shuffleOffsetX || randX > boardLeft + image.width - shuffleOffsetX ||
-          randY < boardTop - shuffleOffsetY || randY > window.innerHeight
+          randX < boardLeft - shuffleOffsetX || randX > boardLeft + width - shuffleOffsetX
+          // || randY < boardTop - shuffleOffsetY || randY > window.innerHeight
         ) { isInside = false }
       }
 
