@@ -7,13 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/css/ending-style.css">
+    <script defer type="module">
+        // puzzle.js에서 이미지 주소 가져와서 넣기
+        import imageSrcURL from '/src/js/puzzle.js'
+        const img = document.querySelector('#image-past img')
+        img.src = imageSrcURL.past;
+    </script>
     <title>Document</title>
 </head>
 
 
 <div class="container">
-    <div id="image-now">
-        <img src="src/img/puzzlesample-past-1.jpg" alt="">
+    <div id="image-past">
+        <img src="" alt="과거 이미지">
     </div>
 
 
