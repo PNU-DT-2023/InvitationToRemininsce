@@ -1,6 +1,5 @@
-*{
-    margin: 0;
-}
+@import url(/src/css/main.css);
+
  .container {
     position: fixed;
     height: 100%;
@@ -10,10 +9,10 @@
     align-items: center;
  }
 
- #image-now {
+ #image-past {
     position: absolute;
-    width: 40vw;
-    height: 30vw;
+    width: var(--frame-width);
+    height: var(--frame-heigth);
     overflow: hidden;
     background-color: black;
     justify-content: center;
@@ -24,9 +23,9 @@
     transform: translate(-50%, -50%);
  }
 
- #image-now img {
+ #image-past img {
     position: absolute;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0;
     border: 3px solid #000;
     top: 50%;
@@ -43,8 +42,8 @@
 
  @keyframes expand {
     0% {
-        width: 40vw;
-        height: 30vw;
+        width: var(--frame-width);
+        height: var(--frame-heigth);
     }
     
     100% {

@@ -1,5 +1,5 @@
-const imgContainer = document.querySelector('#image-now');
-const img = document.querySelector('#image-now img');
+const imgContainer = document.querySelector('#image-past');
+const img = document.querySelector('#image-past img');
 
 // 확장 애니메이션
 setTimeout(() => {
