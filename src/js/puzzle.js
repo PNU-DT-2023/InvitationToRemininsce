@@ -156,6 +156,7 @@ image.addEventListener('load', function () {
           document.getElementById('puzzle-complete').setAttribute("class", "active");
           location.href = './ending.html';
         }, 1000);
+
       }
     }
 
@@ -215,3 +216,5 @@ image.addEventListener('load', function () {
   }
 
 });
+
+
