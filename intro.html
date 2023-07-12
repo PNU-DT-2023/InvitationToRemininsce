@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Envelope Animation</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="wrapper" onclick="toggleEnvelope()">
+        <div class="lid one"></div>
+        <div class="lid two"></div>
+        <div class="envelope"></div>
+        <div class="letter">
+            <p class="invitation">초대장</p>
+            <p class="detail">2023 부산대학교 디자인학과 디자인앤테크놀로지전공 졸업전시에 초대합니다.</p>
+        </div>
+    </div>
+
+    <script>
+        var wrapper = document.querySelector('.wrapper');
+        var isOpen = false;
+
+        wrapper.addEventListener('click', function() {
+            isOpen = !isOpen;
+            if (isOpen) {
+                wrapper.classList.add('open');
+            } else {
+                wrapper.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
