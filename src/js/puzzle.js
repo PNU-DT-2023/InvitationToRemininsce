@@ -78,18 +78,23 @@ image.addEventListener('load', function () {
       );
 
       //퍼즐조각 동적 추가
+      var pieceWrap = document.createElement('div');
+      
+      pieceWrap.id = 'piece' + pieceNum;
+      pieceWrap.className = 'puzzle-piece';
+      
       var piece = document.createElement('div');
-      piece.id = 'piece' + pieceNum;
-      piece.className = 'puzzle-piece';
+      piece.className = 'puzzle-piece-inner';
       piece.style.width = pieceWidth + keyWidth + 'px';
       piece.style.height = pieceHeight + keyHeight + 'px';
+      piece.style.cursor = 'pointer';
       piece.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
       piece.style.backgroundSize = (pieceWidth + keyWidth) + 'px ' + (pieceHeight + keyHeight) + 'px';
-      piece.style.cursor = 'pointer';
       piece.style.clipPath = "polygon(" + pieceShape[pieceNum] + ")";
 
-      puzzleContainer.appendChild(piece);
-      puzzlePieces.push(piece);
+      pieceWrap.appendChild(piece);
+      puzzleContainer.appendChild(pieceWrap);
+      puzzlePieces.push(pieceWrap);
 
 
       //퍼즐조각이 들어갈 위치(퍼즐판) 동적 추가
@@ -147,15 +152,15 @@ image.addEventListener('load', function () {
           (Math.abs(parseInt(piece.style.left) - parseInt(position.style.left)) < snapOffset)) {
           piece.style.top = position.style.top;
           piece.style.left = position.style.left;
-          piece.classList.add("snap");
-          setTimeout(function () { piece.classList.remove("snap") }, 500);
           if (pieceIdx == posIdx) {
             piece.classList.add("rightplace");
             completed.add(pieceIdx);
             piece.style.cursor = 'default';
-            piece.style.zIndex = boardZIndex--;
+            piece.style.zIndex = boardZIndex++;
+          } else 
+            piece.classList.add("snap");
+            setTimeout(function () { piece.classList.remove("snap") }, 1000);
           }
-        }
       });
 
 
