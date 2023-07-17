@@ -1,3 +1,19 @@
+
+const pieceShape = [
+  "85% 15%, 85% 38%, 100% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 70%, 38% 85%, 15% 85%, 15% 15%",
+  "85% 15%, 85% 38%, 70% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 70%, 38% 85%, 15% 85%, 15% 62%, 30% 50%, 15% 38%, 15% 15%",  
+  "62% 15%, 85% 15%, 85% 38%, 70% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 100%, 38% 85%, 15% 85%, 15% 62%, 0% 50%, 15% 38%, 15% 15%, 38% 15%",  
+  "62% 15%, 85% 15%, 85% 38%, 85% 62%, 85% 85%, 62% 85%, 50% 100%, 38% 85%, 15% 85%, 15% 62%, 0% 50%, 15% 38%, 15% 15%, 38% 15%",  
+  "50% 0%, 62% 15%, 85% 15%, 85% 38%, 100% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 100%, 38% 85%, 15% 85%, 15% 62%, 15% 38%, 15% 15%, 38% 15%",
+  "50% 0%, 62% 15%, 85% 15%, 85% 38%, 70% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 70%, 38% 85%, 15% 85%, 15% 62%, 30% 50%, 15% 38%, 15% 15%, 38% 15%",  
+  "50% 30%, 62% 15%, 85% 15%, 85% 38%, 70% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 100%, 38% 85%, 15% 85%, 15% 62%, 0% 50%, 15% 38%, 15% 15%, 38% 15%",  
+  "50% 30%, 62% 15%, 85% 15%, 85% 38%, 85% 62%, 85% 85%, 62% 85%, 50% 70%, 38% 85%, 15% 85%, 15% 62%, 0% 50%, 15% 38%, 15% 15%, 38% 15%",  
+  "50% 30%, 62% 15%, 85% 15%, 85% 38%, 70% 50%, 85% 62%, 85% 85%, 62% 85%, 38% 85%, 15% 85%, 15% 62%, 15% 38%, 15% 15%, 38% 15%",  
+  "50% 0%, 62% 15%, 85% 15%, 85% 38%, 70% 50%, 85% 62%, 85% 85%, 15% 85%, 15% 62%, 0% 50%, 15% 38%, 15% 15%, 38% 15%",  
+  "50% 30%, 62% 15%, 85% 15%, 85% 38%, 100% 50%, 85% 62%, 85% 85%, 15% 85%, 15% 62%, 0% 50%, 15% 38%, 15% 15%, 38% 15%",  
+  "50% 0%, 62% 15%, 85% 15%, 85% 85%, 15% 85%, 15% 62%, 30% 50%, 15% 38%, 15% 15%, 38% 15%"
+];
+
 const imageSrcURL = { 
   past : 'src/img/puzzlesample-past-wide.jpg',
   now : 'src/img/puzzlesample-now-wide.jpg',
@@ -44,49 +60,58 @@ image.addEventListener('load', function () {
 
   var pieceWidth = width / pieceRow;
   var pieceHeight = height / pieceColumn;
+  var keyWidth = pieceWidth * 3 / 7;
+  var keyHeight = pieceWidth * 3 / 7;
 
   var status = 0;
 
   for (var i = 0; i < pieceColumn; i++) {
     for (var j = 0; j < pieceRow; j++) {
+      var pieceNum = i * pieceRow + j;
 
       //이미지 자르기
       var canvas = document.createElement('canvas');
-      canvas.width = pieceWidth;
-      canvas.height = pieceHeight;
+      canvas.width = pieceWidth + keyWidth;
+      canvas.height = pieceHeight + keyHeight;
       var context = canvas.getContext('2d');
       context.drawImage(
         image,
-        j * pieceWidth + bezelWidth,
-        i * pieceHeight + bezelHeight,
-        pieceWidth,
-        pieceHeight,
+        j * pieceWidth + bezelWidth - keyWidth/2,
+        i * pieceHeight + bezelHeight - keyHeight/2,
+        pieceWidth + keyWidth,
+        pieceHeight + keyHeight,
         0,
         0,
-        pieceWidth,
-        pieceHeight
+        pieceWidth + keyWidth,
+        pieceHeight + keyHeight
       );
 
       //퍼즐조각 동적 추가
+      var pieceWrap = document.createElement('div');
+      
+      pieceWrap.id = 'piece' + pieceNum;
+      pieceWrap.className = 'puzzle-piece';
+      
       var piece = document.createElement('div');
-      piece.id = 'piece' + (i * pieceColumn + j);
-      piece.className = 'puzzle-piece';
-      piece.style.width = pieceWidth + 'px';
-      piece.style.height = pieceHeight + 'px';
-      piece.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
-      piece.style.backgroundSize = pieceWidth + 'px ' + pieceHeight + 'px';
+      piece.className = 'puzzle-piece-inner';
+      piece.style.width = pieceWidth + keyWidth + 'px';
+      piece.style.height = pieceHeight + keyHeight + 'px';
       piece.style.cursor = 'pointer';
+      piece.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
+      piece.style.backgroundSize = (pieceWidth + keyWidth) + 'px ' + (pieceHeight + keyHeight) + 'px';
+      piece.style.clipPath = "polygon(" + pieceShape[pieceNum] + ")";
 
-      puzzleContainer.appendChild(piece);
-      puzzlePieces.push(piece);
+      pieceWrap.appendChild(piece);
+      puzzleContainer.appendChild(pieceWrap);
+      puzzlePieces.push(pieceWrap);
 
 
       //퍼즐조각이 들어갈 위치(퍼즐판) 동적 추가
       var position = document.createElement('div');
-      position.id = 'position' + (i * pieceColumn + j);
+      position.id = 'position' + (pieceNum);
       position.className = 'puzzle-position';
-      position.style.top = boardTop + pieceHeight * i + 'px';
-      position.style.left = boardLeft + pieceWidth * j + 'px';
+      position.style.top = boardTop + pieceHeight * i  - keyHeight/2 + 'px';
+      position.style.left = boardLeft + pieceWidth * j - keyWidth/2 + 'px';
       position.style.height = pieceHeight + 'px';
       position.style.width = pieceWidth + 'px';
       puzzleBoard.appendChild(position);
@@ -136,15 +161,15 @@ image.addEventListener('load', function () {
           (Math.abs(parseInt(piece.style.left) - parseInt(position.style.left)) < snapOffset)) {
           piece.style.top = position.style.top;
           piece.style.left = position.style.left;
-          piece.classList.add("snap");
-          setTimeout(function () { piece.classList.remove("snap") }, 500);
           if (pieceIdx == posIdx) {
             piece.classList.add("rightplace");
             completed.add(pieceIdx);
             piece.style.cursor = 'default';
-            piece.style.zIndex = boardZIndex--;
+            piece.style.zIndex = boardZIndex++;
+          } else 
+            piece.classList.add("snap");
+            setTimeout(function () { piece.classList.remove("snap") }, 1000);
           }
-        }
       });
 
 
