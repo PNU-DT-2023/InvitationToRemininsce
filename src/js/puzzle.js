@@ -1,3 +1,4 @@
+
 const pieceShape = [
   "85% 15%, 85% 38%, 100% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 70%, 38% 85%, 15% 85%, 15% 15%",
   "85% 15%, 85% 38%, 70% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 70%, 38% 85%, 15% 85%, 15% 62%, 30% 50%, 15% 38%, 15% 15%",  
@@ -13,8 +14,14 @@ const pieceShape = [
   "50% 0%, 62% 15%, 85% 15%, 85% 85%, 15% 85%, 15% 62%, 30% 50%, 15% 38%, 15% 15%, 38% 15%"
 ];
 
+const imageSrcURL = { 
+  past : 'src/img/puzzlesample-past-wide.jpg',
+  now : 'src/img/puzzlesample-now-wide.jpg',
+}
+export default imageSrcURL;
+
 var image = new Image();
-image.src = 'src/img/puzzlesample-past-wide.jpg';
+image.src = imageSrcURL.past
 
 var activePiece = null;
 var offset = { x: 0, y: 0 };
@@ -33,6 +40,8 @@ var subway = document.getElementById('subway');
 image.addEventListener('load', function () {
 
   const backgroundImage = document.getElementById('image-now');
+  //js에서 퍼즐 현재 이미지 삽입
+  document.querySelector('#image-now img').src = imageSrcURL?.now ;
   const backgroundSize = window.getComputedStyle(backgroundImage);
   const width = parseInt(backgroundSize.getPropertyValue('width'), 10);
   const height = parseInt(backgroundSize.getPropertyValue('height'), 10);
@@ -180,7 +189,6 @@ image.addEventListener('load', function () {
           document.getElementById('puzzle-complete').setAttribute("class", "active");
           location.href = './ending.html';
         }, 1000);
-
       }
     }
 
@@ -240,5 +248,3 @@ image.addEventListener('load', function () {
   }
 
 });
-
-

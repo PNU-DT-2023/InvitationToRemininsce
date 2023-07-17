@@ -1,9 +1,4 @@
-/* --- puzzle --- */
-
-* {
-    font-family: 'pretendard';
-    touch-action: none;
-}
+@import url(/src/css/main.css);
 
 /* 타이틀 */
 .title-container {
@@ -13,7 +8,7 @@
     transform: translate(-50%, 0);
     padding: 16px;
     font-size: 28pt;
-    width: calc(70vh*4/3);
+    width: var(--frame-width);
     text-align: center;
 }
 
@@ -64,7 +59,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: 70vh;
-    width: calc(70vh*4/3);
+    width: var(--frame-width);
     overflow: hidden;
     z-index: -99;
 }
@@ -73,6 +68,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    /* height: 100vh; */
     transform: translate(-50%, -50%);
 }
 

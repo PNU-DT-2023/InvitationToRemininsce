@@ -1,3 +1,12 @@
-* {
-    
+:root {
+    /* 프레임 크기 변수 지정 */
+    --frame-width: calc(70vh*4/3);
+    --frame-heigth: 70vh;
+ }
+
+ * {
+    /* 공통 스타일 */
+    font-family: 'pretendard';
+    touch-action: none;
+    margin: 0;
 }
