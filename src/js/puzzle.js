@@ -15,8 +15,8 @@ const pieceShape = [
 ];
 
 const imageSrcURL = { 
-  past : 'src/img/puzzlesample-past-wide.jpg',
-  now : 'src/img/puzzlesample-now-wide.jpg',
+  past : './src/img/puzzlesample-past-wide.jpg',
+  now : './src/img/puzzlesample-now-wide.jpg',
 }
 export default imageSrcURL;
 
