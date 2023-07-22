@@ -1,4 +1,4 @@
-@import url(/src/css/main.css);
+@import url('main.css');
 
  .container {
     position: fixed;
