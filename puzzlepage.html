@@ -12,17 +12,16 @@
 </head>
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-  
-  <div class="title-container">
-    <span class="fix-word">Invitation to&nbsp
-      <span class="prev-word"> Remininsce</span>
-      <span class="next-word"> 2008</span>
-    </span>
+
+  <div id="image-now-bg">
+    <img src="" alt="배경이미지">
   </div>
-  
-  
-  <div id="image-now">
-    <img src="" alt="현재 퍼즐판 이미지">
+
+  <div class="container" id="board-wrap">
+    <div id="board-outline"></div>
+    <div id="image-now">
+      <img src="" alt="현재 퍼즐판 이미지">
+    </div>
   </div>
 
   <div id="puzzle"> </div>
@@ -32,37 +31,25 @@
   <!-- 진행도 -->
   <div id="progress-container">
     <div id="progress-number">
-      <span>완성까지 </span>
+      <span id="progress-message">추억 로딩 중... </span>
       <span id="progress-text"> 0% </span>
-    </div>
-
-    <div id="progress-subway">
-      <div class="station" id="now">2023</div>
-      <div class="station" id="past">2008</div>
-      <div id="bar-container">
-        <div id="progress-bar"></div>
-        
-        <div class="spot here" id="left"></div>
-        <div class="spot" id="right"></div>
-        <div id="subway"></div>
-        
-      </div>
     </div>
   </div>
 
-  <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg"
+    version="1.1">
     <defs>
-          <filter id="round">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />    
-              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-              <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-          </filter>
-          <filter id="no-round">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />    
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-        </filter>
-      </defs>
+      <filter id="round">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+      <filter id="no-round">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
   </svg>
 
   <!-- 개발자용 -->

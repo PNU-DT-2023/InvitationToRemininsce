@@ -1,77 +1,55 @@
 @import url('main.css');
 
-/* 타이틀 */
-.title-container {
-    white-space: nowrap;
+/* 인터 배경 */
+#image-now-bg{
     position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
-    padding: 16px;
-    font-size: 28pt;
-    width: var(--frame-width);
-    text-align: center;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: -100;
 }
 
-.fix-word{
-    padding-right: 8px;
-}
-
-.prev-word {
+#image-now-bg img{
     position: absolute;
-    /* display: inline-block; */
-    animation: shrinkAnimation 1s 2s forwards;
-    transform-origin: bottom;
-}
-
-.next-word {
-    position: absolute;
-    display: inline-block;
-    transform: scaleY(0);
-    animation: appearAnimation 1s 2s forwards;
-    transform-origin: top;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 1s;
 }
 
 
-@keyframes shrinkAnimation {
-    0% {
-        transform: scaleY(1);
-    }
-
-    100% {
-        transform: scaleY(0);
-    }
-}
-
-@keyframes appearAnimation {
-    0% {
-        transform: scaleY(0);
-    }
-
-    100% {
-        transform: scaleY(1);
-    }
-}
-
-/* 배경이미지*/
+/* 퍼즐 배경이미지 */
 #image-now {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 70vh;
+    height: var(--frame-height);
     width: var(--frame-width);
     overflow: hidden;
     z-index: -99;
+    border:  1px solid #fff
+}
+
+#board-outline{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: var(--frame-height);
+    width: var(--frame-width);
+    border: 20px solid;
+    border-image: url('/src/img/wave.png') 33 round;
 }
 
 #image-now img {
     position: absolute;
     top: 50%;
     left: 50%;
-    /* height: 100vh; */
     transform: translate(-50%, -50%);
 }
-
 
 /* 퍼즐조각들이 돌아다닐 공간(화면크기) */
 #puzzle {
@@ -87,7 +65,7 @@
     position: absolute;
     cursor: pointer;
     box-sizing: border-box;
-    filter: url(#round) drop-shadow(3px 5px 1px rgba(0, 0, 0, 0.5));
+    filter: url(#round) drop-shadow(3px 5px 0px rgba(0, 0, 0, 0.5));
     transform: translateZ(0);
 }
 
@@ -139,6 +117,7 @@
     }
 }
 
+/* 퍼즐 스냅 위치 */
 #puzzle-board {
     top: 0;
     left: 0;
@@ -159,99 +138,20 @@
 /* --- 진행도 표시 --- */
 #progress-container {
     position: absolute;
-    bottom: 10px;
+    top: 5vh;
     left: 50%;
     transform: translate(-50%, 0);
-    width: calc(70vh*4/3);
     height: 50px;
-    /* background-color: cyan; */
     z-index: -1;
 }
 
-/* 숫자 형식 */
 #progress-number {
-    display: none;
-    width: 200px;
+    width: fit-content;
     font-size: 20pt;
+    color: #fff;
     padding: 10px;
     text-align: center;
 }
-
-/* 바 형식 */
-#progress-subway{
-    width: 100%;
-    height: 100%;
-}
-
-#bar-container{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(70vh*4/3 - 140px);
-    height: 20px;
-    background-color: #ddd;
-    /* overflow: hidden; */
-}
-
-.spot{
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    border-radius: 50%;
-    border: 5px solid #ddd;
-    z-index: 50;
-    transition: 0.5s ease;
-}
-#left{
-    left: 0;
-}
-#right{
-    left: 100%;
-}
-
-.here{
-    border: 10px solid #FFAD33;
-}
-
-.station{
-    position: absolute;
-    font-size: 16pt;
-    transform: translate(0, -50%);
-    top: 50%;
-}
-#now{
-    left: 0;
-}
-#past{
-    right: 0;
-}
-
-#subway{
-    background-image: url(../img/car.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    width: 70px;
-    height: 36px;
-    /* left: 0; */
-    bottom: 0;
-    transition: 0.5s ease;
-    z-index: 51;
-}
-
-#progress-bar{
-    width: 0%;
-    height: 100%;
-    background-color: #FFAD33;
-    transition: width 0.5s ease;
-}
-
 
 /* --- 개발자용 --- */
 
