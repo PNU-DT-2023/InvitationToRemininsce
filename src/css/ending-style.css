@@ -1,9 +1,12 @@
 @import url('main.css');
 @import url('puzzle-style.css');
 @import url("https://use.typekit.net/ndy1clu.css");
-
+:root {
+   --ending-frame-width: calc(100vw - 72px);
+   --ending-frame-height: calc(100vh - 76px);
+}
 .container {
-   width: 100%;
+   width: 100vw;
    height: 100vh;
    display: flex;
    justify-content: center;
@@ -15,8 +18,8 @@
    position: relative;
    display: flex;
    border-radius: 40px;
-   width: calc(100vw - 72px);
-   height: calc(100vh - 76px);
+   width: var(--ending-frame-width);
+   height: var(--ending-frame-height);
    overflow: hidden;
    align-items: center;
    justify-content: center;
@@ -47,7 +50,9 @@
    padding: 40px;
    box-sizing: border-box;
    color: white;
+   opacity: 0;
 }
+
 
 /* left,right section */
 .side-wrapper {
@@ -169,22 +174,38 @@ button#watching-mode-btn:hover {
    z-index: 0;
 }
 
+.show-animation {
+   animation-name: show;
+   animation-duration: 1s;
+   animation-fill-mode: forwards
+}
+@keyframes show {
+   0% {
+       opacity: 0;
+   }
+   
+   100% {
+       opacity: 1;
+   }
+ }
+
  /* 점점 넓어지는 애니메이션 */
- .expand-animation {
-    animation-name: expand;
+ .contract-animation {
+    animation-name: contract;
     animation-duration: 3s;
     animation-fill-mode: forwards;
   }
 
- @keyframes expand {
+ @keyframes contract {
     0% {
-        width: var(--frame-width);
-        height: var(--frame-heigth);
+        width: 100%;
+        height: 100%;
+        border-radius: 0px;
     }
     
     100% {
-        width: 100%;
-        height: 100%;
+        width: var(--ending-frame-width);
+        height: var(--ending-frame-height);
+        border-radius: 40px;
     }
   }
-  

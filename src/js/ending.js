@@ -1,8 +1,9 @@
-const imgContainer = document.querySelector('.content-wrapper');
-const img = document.querySelector('#image-past img');
+const frame = document.querySelector('.content-wrapper');
+const ui = document.querySelector('.ui-wrapper');
 
-// 확장 애니메이션
+frame.classList.add('contract-animation');
 setTimeout(() => {
-    imgContainer.classList.toggle('expand-animation');
-}, 1000);
+        ui.classList.add('show-animation');
+}, 3000);
+
 
