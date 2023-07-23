@@ -6,23 +6,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/css/ending-style.css">
-    <script defer type="module">
+    <link defer rel="stylesheet" href="./src/css/ending-style.css">
+    <script type="module">
         // puzzle.js에서 이미지 주소 가져와서 넣기
         import imageSrcURL from './src/js/puzzle.js'
-        const img = document.querySelector('#image-past img')
+        const img = document.querySelector('#image-now-bg')
         img.src = imageSrcURL.past;
     </script>
     <title>Document</title>
 </head>
 
 
-<div class="container">
-    <div id="image-past">
-        <img src="" alt="과거 이미지">
+
+    <div class="container">
+        <div class="content-wrapper">
+                <div class="ui-wrapper">
+                    <div class="side-wrapper" id="left">
+                        <p id="address">Busandaehak-ro 63beon-gil, Geumjeong-gu, Busan</p>
+                        <img id="arrow" src="./src/img/ending_addressArrow.svg" alt="">
+                        <p id="address">2, Jangjeon-dong,Geumjeong-gu, Busan</p>
+                    </div>
+
+                    <div class="center-wrapper">
+                        <img id="title" src="./src/img/ending_title.svg" alt="Thank you for Accepting!">
+                        <div id="ending-popup">
+                                <p>과거의 부산대 정문에 도착했습니다.<br>이곳에서 당신에게는 어떤 일들이 있었나요?<br>잠시 머물러 추억에 잠겨보세요.</p>
+                                <button id="watching-mode-btn">
+                                    감상모드 ON
+                                </button>
+                            
+                        </div>
+                        <div>TEAMWEB</div>
+                    </div>
+
+                    <div class="side-wrapper">
+                        <p id="date" style="text-align: right;">2023.11.23(FRI)</p>
+                        <button id="home-btn">
+                            <div>
+                                <p>처음으로<br>돌아가기</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170" fill="none">
+                                    <circle cx="85" cy="85" r="84.5" fill="#E18E11" stroke="white"/>
+                                </svg>
+                            </div>
+                        </button>
+
+                    </div>
+                </div>
+                <div id="home-btn-s">
+                    <img src="./src/img/ending_home-icon.svg" alt="">
+                </div>
+                <img id="image-now-bg" src="" alt="과거 이미지">
+        </div>  
     </div>
 
 
-</div>
-<script defer src="./src/js/ending.js"></script>
+<script src="./src/js/ending.js"></script>
+
 </html>

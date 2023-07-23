@@ -1,4 +1,3 @@
-
 const pieceShape = [
   "85% 15%, 85% 38%, 100% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 70%, 38% 85%, 15% 85%, 15% 15%",
   "85% 15%, 85% 38%, 70% 50%, 85% 62%, 85% 85%, 62% 85%, 50% 70%, 38% 85%, 15% 85%, 15% 62%, 30% 50%, 15% 38%, 15% 15%",  
@@ -20,8 +19,10 @@ const imageSrcURL = {
 }
 export default imageSrcURL;
 
-var image = new Image();
-image.src = imageSrcURL.past
+var imgPast = new Image();
+imgPast.src = imageSrcURL.past;
+var imgNow = new Image();
+imgNow.src = imageSrcURL.now;
 
 var activePiece = null;
 var offset = { x: 0, y: 0 };
@@ -31,18 +32,20 @@ var pieceColumn = 3;
 
 var solveButton = document.getElementById('puzzle-solve');
 var progressNum = document.getElementById('progress-text');
-var progressBar = document.getElementById('progress-bar');
-var spotLeft = document.getElementById('left');
-var spotRight = document.getElementById('right');
-var subway = document.getElementById('subway');
+var backgroundImage = document.querySelector('#image-now-bg img');
 
 //이미지 잘라서 퍼즐조각 만드는 코드(직사각형)
-image.addEventListener('load', function () {
+imgPast.addEventListener('load', function () {
 
-  const backgroundImage = document.getElementById('image-now');
+  const image = resizeImage(imgPast);
+  const bgImage = resizeImage(imgNow);
+
+  const boardImage = document.getElementById('image-now');
   //js에서 퍼즐 현재 이미지 삽입
-  document.querySelector('#image-now img').src = imageSrcURL?.now ;
-  const backgroundSize = window.getComputedStyle(backgroundImage);
+  const imageNowElement = document.querySelector('#image-now img');
+  imageNowElement.src = bgImage.src;
+  backgroundImage.src = image.src;
+  const backgroundSize = window.getComputedStyle(boardImage);
   const width = parseInt(backgroundSize.getPropertyValue('width'), 10);
   const height = parseInt(backgroundSize.getPropertyValue('height'), 10);
   const bezelWidth = (image.width - width) / 2;
@@ -61,7 +64,7 @@ image.addEventListener('load', function () {
   var pieceWidth = width / pieceRow;
   var pieceHeight = height / pieceColumn;
   var keyWidth = pieceWidth * 3 / 7;
-  var keyHeight = pieceWidth * 3 / 7;
+  var keyHeight = pieceHeight * 3 / 7;
 
   var status = 0;
 
@@ -175,20 +178,17 @@ image.addEventListener('load', function () {
 
       status = parseInt(completed.size / (puzzlePieces.length) * 100);
       progressNum.textContent = status + '%';
-
-      progressBar.style.width = status + '%';
-      subway.style.left = status + '%';
-      if(status!= 0){ spotLeft.classList.remove("here") }
-      if(status == 100){ spotRight.classList.add("here"); }
-
+      backgroundImage.style.opacity = status / 100;
 
       //모든 퍼즐 조각이 완성 (mouseup에서 판정)
       //메시지 띄우기(임시)
       if (completed.size == puzzlePieces.length) {
+        document.getElementById('puzzle-complete').setAttribute("class", "active");
+        document.getElementById('progress-message').textContent = '추억 로딩 완료!';
+        progressNum.textContent = '';
         setTimeout(() => {
-          document.getElementById('puzzle-complete').setAttribute("class", "active");
           location.href = './ending.html';
-        }, 1000);
+        }, 1500);
       }
     }
 
@@ -207,6 +207,30 @@ image.addEventListener('load', function () {
 
   //////functions//////
 
+  function resizeImage(sourceImage){
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    if (sourceImage.width <= viewportWidth && sourceImage.height <= viewportHeight) {
+      return sourceImage;
+    }
+
+    const canvas = document.createElement('canvas');
+  canvas.width = viewportWidth;
+  canvas.height = viewportHeight;
+
+  const ctx = canvas.getContext('2d');
+
+  const scaleFactor = Math.max(viewportWidth / sourceImage.width, viewportHeight / sourceImage.height);;
+  const scaledWidth = sourceImage.width * scaleFactor;
+  const scaledHeight = sourceImage.height * scaleFactor;
+
+  ctx.drawImage(sourceImage, 0, 0, scaledWidth, scaledHeight);
+
+  const resizedImage = new Image();
+  resizedImage.src = canvas.toDataURL('image/jpeg', 1.0);
+
+  return resizedImage;
+  }
 
   //퍼즐조각 랜덤 위치에 배치
   //너무 화면 바깥에 나가지 않도록
@@ -215,20 +239,27 @@ image.addEventListener('load', function () {
     puzzlePieces.forEach(function (piece) {
       var shuffleOffsetX = pieceWidth / 2;
       var shuffleOffsetY = pieceHeight / 2;
+      var topOffset = 50;
       var randX, randY;
       var isInside = true;
 
-      while (isInside) { //랜덤좌표 생성하다가
+      var centerX = window.innerWidth / 2;
+      var rectWidth = width*0.7;
+  
+      while (isInside) {
         randX = Math.floor(Math.random() * (window.innerWidth - shuffleOffsetX));
         randY = Math.floor(Math.random() * (window.innerHeight - shuffleOffsetY));
+  
+        if (
+          randX >= centerX - rectWidth / 2 && randX <= centerX - shuffleOffsetX + rectWidth / 2 
+        ) {
+          continue;
+        }
 
-        if ( //사진 안쪽이 아닐때 while문 탈출
-          randX < boardLeft - shuffleOffsetX || randX > boardLeft + width - shuffleOffsetX
-          // || randY < boardTop - shuffleOffsetY || randY > window.innerHeight
-        ) { isInside = false }
+        isInside = false;
       }
 
-      piece.style.left = randX + 'px';
+      piece.style.left = randX - shuffleOffsetX + 'px';
       piece.style.top = randY + 'px';
 
     });

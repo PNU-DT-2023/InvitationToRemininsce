@@ -1,25 +1,31 @@
-const imgContainer = document.querySelector('#image-past');
-const img = document.querySelector('#image-past img');
+const frame = document.querySelector('.content-wrapper');
+const ui = document.querySelector('.ui-wrapper');
 
-// 확장 애니메이션
-setTimeout(() => {
-    imgContainer.classList.toggle('expand-animation');
-}, 1000);
+const homeButton = document.getElementById("home-btn");
+const homeButtonSmall = document.getElementById("home-btn-s");
+const offPopupButton = document.getElementById("watching-mode-btn");
 
-// (임시)마우스 움직이면 이미지 변형
-setTimeout(() => {
-    imgContainer.addEventListener('mousemove', tiltImage);
-}, 2000);
-
-function tiltImage(event) {
-    const xAxis = (window.innerWidth / 2 - event.clientX)*0.01 ;
-    const yAxis = (window.innerHeight / 2 - event.clientY)*0.01 ;
-    img.style.transform = `translate(-${50}%, -50%) skew(${xAxis}deg, ${yAxis}deg)`;
+const moveToHome = () => {
+    location.href = './index.html';
 }
-  
-imgContainer.addEventListener('mouseout', resetTilt);
-
-// 초기화
-function resetTilt() {
-    img.style.transform = 'translate(-50%, -50%) skew(0)';
+const hideUI = () => {
+    ui.classList.remove('show-animation');
+    homeButtonSmall.classList.add('show');
+    homeButtonSmall.addEventListener('click', moveToHome);
+    homeButtonSmall.addEventListener('touch', moveToHome);
 }
+
+const startEnding = () => {
+    frame.classList.add('contract-animation');
+    frame.addEventListener('animationend', () => {
+        console.log('show');
+        ui.classList.add('show-animation');
+        
+        homeButton.addEventListener('click', moveToHome);
+        homeButton.addEventListener('touch', moveToHome);
+        offPopupButton.addEventListener('click',hideUI);   
+        offPopupButton.addEventListener('touch',hideUI);
+    })
+}
+
+setTimeout(startEnding, 1000);
