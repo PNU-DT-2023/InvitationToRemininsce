@@ -153,6 +153,11 @@ button#watching-mode-btn:hover {
    right: 0;
    display: flex;
    justify-content: right;
+   transition: .3s;
+}
+
+#home-btn:hover {
+   transform: scale(1.1);
 }
 #home-btn > div {
    position: relative;
@@ -177,14 +182,16 @@ button#watching-mode-btn:hover {
 .show-animation {
    animation-name: show;
    animation-duration: 1s;
-   animation-fill-mode: forwards
+   animation-fill-mode: forwards;
 }
 @keyframes show {
    0% {
+      display: none;
        opacity: 0;
    }
    
    100% {
+      display: block;
        opacity: 1;
    }
  }
