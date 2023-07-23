@@ -193,6 +193,8 @@ button#watching-mode-btn:hover {
 #image-now-bg{
    opacity: 1;
    position: absolute;
+   width: 100%;
+   object-fit: cover;
    z-index: 0;
 }
 
