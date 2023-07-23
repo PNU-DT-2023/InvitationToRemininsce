@@ -5,21 +5,27 @@ const homeButton = document.getElementById("home-btn");
 const homeButtonSmall = document.getElementById("home-btn-s");
 const offPopupButton = document.getElementById("watching-mode-btn");
 
-frame.classList.add('contract-animation');
-setTimeout(() => {
+const moveToHome = () => {
+    location.href = './index.html';
+}
+const hideUI = () => {
+    ui.classList.remove('show-animation');
+    homeButtonSmall.classList.add('show');
+    homeButtonSmall.addEventListener('click', moveToHome);
+    homeButtonSmall.addEventListener('touch', moveToHome);
+}
+
+const startEnding = () => {
+    frame.classList.add('contract-animation');
+    frame.addEventListener('animationend', () => {
+        console.log('show');
         ui.classList.add('show-animation');
-        homeButton.addEventListener('click', function() {
-            location.href = './index.html';
-        })
+        
+        homeButton.addEventListener('click', moveToHome);
+        homeButton.addEventListener('touch', moveToHome);
+        offPopupButton.addEventListener('click',hideUI);   
+        offPopupButton.addEventListener('touch',hideUI);
+    })
+}
 
-        offPopupButton.addEventListener('click', function() {
-            ui.classList.add('hide');
-            homeButtonSmall.classList.add('show');
-            ui.classList.add('show-animation');
-            homeButtonSmall.addEventListener('click', function() {
-                location.href = './index.html';
-            })
-        })
-}, 3000);
-
-
+setTimeout(startEnding, 1000);
