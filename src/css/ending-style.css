@@ -50,9 +50,13 @@
    padding: 40px;
    box-sizing: border-box;
    color: white;
+   transition: .3s;
    opacity: 0;
 }
 
+.ui-wrapper.hide {
+   display: none;
+}
 
 /* left,right section */
 .side-wrapper {
@@ -171,7 +175,20 @@ button#watching-mode-btn:hover {
    line-height: 170px;
    text-align: center;
 }
-
+/* 감상모드시 홈버튼 */
+#home-btn-s {
+   display: none;
+   position: fixed;
+   top: 20px;
+   right: 20px;
+   transition: .1s;
+}
+#home-btn-s.show {
+   display: block;
+}
+#home-btn-s.show :hover {
+   transform: scale(1.1);
+}
 
 #image-now-bg{
    opacity: 1;
