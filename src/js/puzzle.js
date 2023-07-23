@@ -29,10 +29,13 @@ var offset = { x: 0, y: 0 };
 var snapOffset = 20;
 var pieceRow = 4;
 var pieceColumn = 3;
+var pieceBorderSize = 2;
 
 var solveButton = document.getElementById('puzzle-solve');
 var progressNum = document.getElementById('progress-text');
 var backgroundImage = document.querySelector('#image-now-bg img');
+
+const loadingIcon = document.getElementById('loading-icon');
 
 //이미지 잘라서 퍼즐조각 만드는 코드(직사각형)
 imgPast.addEventListener('load', function () {
@@ -95,16 +98,16 @@ imgPast.addEventListener('load', function () {
       pieceWrap.id = 'piece' + pieceNum;
       pieceWrap.className = 'puzzle-piece';
       
-      var piece = document.createElement('div');
-      piece.className = 'puzzle-piece-inner';
-      piece.style.width = pieceWidth + keyWidth + 'px';
-      piece.style.height = pieceHeight + keyHeight + 'px';
-      piece.style.cursor = 'pointer';
-      piece.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
-      piece.style.backgroundSize = (pieceWidth + keyWidth) + 'px ' + (pieceHeight + keyHeight) + 'px';
-      piece.style.clipPath = "polygon(" + pieceShape[pieceNum] + ")";
+      var pieceInner = document.createElement('div');
+      pieceInner.className = 'puzzle-piece-inner';
+      pieceInner.style.width = pieceWidth + keyWidth + 'px';
+      pieceInner.style.height = pieceHeight + keyHeight + 'px';
+      pieceInner.style.cursor = 'pointer';
+      pieceInner.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
+      pieceInner.style.backgroundSize = (pieceWidth + keyWidth) + 'px ' + (pieceHeight + keyHeight) + 'px';
+      pieceInner.style.clipPath = "polygon(" + pieceShape[pieceNum] + ")";
 
-      pieceWrap.appendChild(piece);
+      pieceWrap.appendChild(pieceInner);
       puzzleContainer.appendChild(pieceWrap);
       puzzlePieces.push(pieceWrap);
 
@@ -183,6 +186,7 @@ imgPast.addEventListener('load', function () {
       //모든 퍼즐 조각이 완성 (mouseup에서 판정)
       //메시지 띄우기(임시)
       if (completed.size == puzzlePieces.length) {
+        loadingIcon.style.display = 'none';
         document.getElementById('puzzle-complete').setAttribute("class", "active");
         document.getElementById('progress-message').textContent = '추억 로딩 완료!';
         progressNum.textContent = '';

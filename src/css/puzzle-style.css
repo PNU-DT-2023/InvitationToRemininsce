@@ -82,7 +82,7 @@
 
 @keyframes fadeout {
     0% {
-        filter: url(#round) drop-shadow(3px 5px 1px rgba(0, 0, 0, 0.5));
+        filter: url(#round) drop-shadow(3px 5px 0px rgba(0, 0, 0, 0.5));
     }
 
     20%{
@@ -105,15 +105,15 @@
 
 @keyframes blink {
     0% {
-        filter: url(#round) drop-shadow(3px 5px 1px rgba(0, 0, 0, 0.5));
+        filter: url(#round) drop-shadow(3px 5px 0px rgba(0, 0, 0, 0.5));
     }
 
-    50% {
-        filter: url(#round) drop-shadow(0 0 0 rgba(0, 0, 0, 0.5));
+    30% {
+        filter: url(#round) drop-shadow(3px 5px 0px rgba(0, 0, 0, 0));
     }
 
     100% {
-        filter: url(#round) drop-shadow(3px 5px 1px rgba(0, 0, 0, 0.5));
+        filter: url(#round) drop-shadow(3px 5px 0px rgba(0, 0, 0, 0.5));
     }
 }
 
@@ -143,6 +143,17 @@
     transform: translate(-50%, 0);
     height: 50px;
     z-index: -1;
+    transition: 1s;
+}
+
+#loading-icon{
+    height: 12pt;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate{
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 #progress-number {
