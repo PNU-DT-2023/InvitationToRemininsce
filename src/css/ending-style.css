@@ -1,5 +1,6 @@
 @import url('main.css');
 @import url('puzzle-style.css');
+@import url("https://use.typekit.net/ndy1clu.css");
 
 .container {
    width: 100%;
@@ -43,7 +44,7 @@
    grid-template-columns: 1fr 2fr 1fr;
    align-items: center;
    justify-content: center;
-   padding: 40px 40px 40px 60px;
+   padding: 40px;
    box-sizing: border-box;
    color: white;
 }
@@ -54,11 +55,18 @@
    display: flex;
    flex-direction: column;
    justify-content: space-between;
+   font-family: 'Lora', sans-serif !important;
+   font-weight: bold;
 }
 
 
+#address {
+   font-family: 'Lora', sans-serif !important;
+   font-weight: bold;
+}
+
 #arrow {
-   height : 100%;
+   /* height : 100%; */
    width: 20px;
 }
 
@@ -127,6 +135,12 @@ button#watching-mode-btn:hover {
 }
 
 /* 우측영역 */
+
+#date {
+   font-family: 'Lora', sans-serif !important;
+   font-weight: bold;
+}
+
 #home-btn {
    background-color: inherit ;
    border: none;
