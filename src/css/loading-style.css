@@ -1,0 +1,154 @@
+@import url(main.css);
+@import url(animation.css);
+
+* {
+    color: white;
+    font-family: 'NeoDunggeunmo';
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#envelope-outline {
+    position: absolute;
+    width: 80%;
+    margin: 50px;
+    z-index: 99;
+}
+
+#line {
+    stroke-width: 1;
+    stroke: white;
+}
+
+#envelope-filled {
+    position: absolute;
+    width: 80%;
+    margin: 50px;
+    z-index: 1;
+    opacity: 0;
+}
+
+
+.title {
+    font-family: 'Catalina Village';
+    font-weight: bold;
+    text-align: center;
+    font-size: 60px;
+
+    max-height: 30%;
+    object-fit: cover;
+    max-width: 80%;
+    display: none;
+}
+
+#background-img {
+    position: absolute;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(5px);
+}
+
+.text-layer {
+    position: relative;
+    height: 100%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    mix-blend-mode: difference;
+}
+.loading-message p{
+    font-family: 'NeoDunggeunmo';
+    font-size: 24px;
+}
+
+.dim-solid {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 1;
+    z-index: 0;
+}
+
+.loading-bar {
+    width: 100%;
+    height: auto;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.loading-bar .line-box {
+    padding: 0.4px;
+    width: 500px;
+    height: 14px;
+    border: 2px solid #ffffff;
+    align-items: center;
+}
+
+.loading-bar .line-box .line {
+    height: 14px;
+    background: #ffffff;
+    animation: loading 6s forwards ease-in;
+    animation-delay: .5s;
+    align-items: center;
+    width: 0%;
+}
+
+
+@keyframes loading {
+    /* 기존 스타일 유지 */
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.button-wrapper {
+    width: 30%;
+    height: 30%;
+    display: none;
+    text-align: center;
+    font-size: 24px;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    justify-content: end;
+    z-index: 99;
+}
+
+.button-wrapper>p{
+    display: block;
+    padding: 0 0 30px 0;
+    color: #333;
+}
+
+.button-wrapper > #go-btn {
+    width: 50%;
+    height: 60px;
+    max-height: 80px;
+    line-height: 60px;
+    color: white;
+    border-radius: 40px;
+    background-color: black;
+    transition: .3s;
+}
+
+.button-wrapper > #go-btn:hover {
+    transform: scale(1.1);
+}

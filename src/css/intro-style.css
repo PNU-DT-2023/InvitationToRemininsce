@@ -1,25 +1,23 @@
-@font-face {
-    font-family: 'NeoDunggeunmo';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+@import url(main.css);
 
 /* 전체 화면을 기준으로 컨테이너를 가운데로 정렬하기 위한 스타일 */
-html, body {
+.container {
+    width: 100%;
     height: 100%;
     margin: 0;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
     min-height: 100%;
+    background-color: black;
 }
 
 /* 컨테이너 스타일 */
 .container {
     text-align: center; /* 이미지와 텍스트를 가운데 정렬 */
 }
+
 
 /* 이미지 스타일 */
 #envelope {
