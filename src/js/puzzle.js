@@ -24,12 +24,15 @@ imgPast.src = imageSrcURL.past;
 var imgNow = new Image();
 imgNow.src = imageSrcURL.now;
 
+imgNow.addEventListener('load', function() {
+  let nowImageLoaded = true;
+});
+
 var activePiece = null;
 var offset = { x: 0, y: 0 };
-var snapOffset = 20;
+var snapOffset = 30;
 var pieceRow = 4;
 var pieceColumn = 3;
-var pieceBorderSize = 2;
 
 var solveButton = document.getElementById('puzzle-solve');
 var progressNum = document.getElementById('progress-text');
@@ -71,6 +74,15 @@ imgPast.addEventListener('load', function () {
 
   var status = 0;
 
+  const body = document.querySelector('body');
+  function preventLongPress(e) {
+      e.preventDefault && e.preventDefault();
+  }
+  body.addEventListener('contextmenu', preventLongPress);
+  body.addEventListener('touchstart', preventLongPress);
+  body.addEventListener('touchmove', preventLongPress);
+  body.addEventListener('touchend', preventLongPress);
+
   for (var i = 0; i < pieceColumn; i++) {
     for (var j = 0; j < pieceRow; j++) {
       var pieceNum = i * pieceRow + j;
@@ -97,7 +109,6 @@ imgPast.addEventListener('load', function () {
       
       pieceWrap.id = 'piece' + pieceNum;
       pieceWrap.className = 'puzzle-piece';
-      
       var pieceInner = document.createElement('div');
       pieceInner.className = 'puzzle-piece-inner';
       pieceInner.style.width = pieceWidth + keyWidth + 'px';
@@ -140,6 +151,7 @@ imgPast.addEventListener('load', function () {
         const startY = e.clientY || e.touches[0].clientY;
         offset.x = startX - piece.offsetLeft;
         offset.y = startY - piece.offsetTop;
+        piece.classList.add('active');
       }
     }
 
@@ -149,7 +161,6 @@ imgPast.addEventListener('load', function () {
         const currentX = e.clientX || e.touches[0].clientX;
         const currentY = e.clientY || e.touches[0].clientY;
 
-
         piece.style.left = currentX - offset.x + 'px';
         piece.style.top = currentY - offset.y + 'px';
       }
@@ -158,6 +169,7 @@ imgPast.addEventListener('load', function () {
     function handleMouseUp(e){
       e.preventDefault();
       activePiece = null;
+      piece.classList.remove('active');
 
       //스냅 (mouseup에서 판정)
       //안맞는 위치에 있어도 스냅은 되도록.
@@ -281,5 +293,4 @@ imgPast.addEventListener('load', function () {
       piece.classList.add("rightplace");
     });
   }
-
 });
