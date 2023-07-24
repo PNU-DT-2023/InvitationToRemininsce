@@ -8,6 +8,17 @@
     --filter-dead: url(#no-round) drop-shadow(0 0 5px rgba(0, 0, 0, 0));
 }
 
+html, body{
+    touch-action: none;
+           -webkit-touch-callout: none;
+           -webkit-user-select: none;
+           -khtml-user-select: none;
+           -moz-user-select: none;
+           -ms-user-select: none;
+           user-select: none;
+           outline: none;
+}
+
 /* 인터 배경 */
 #image-now-bg{
     position: fixed;

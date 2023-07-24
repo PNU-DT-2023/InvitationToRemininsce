@@ -24,10 +24,6 @@ imgPast.src = imageSrcURL.past;
 var imgNow = new Image();
 imgNow.src = imageSrcURL.now;
 
-imgNow.addEventListener('load', function() {
-  let nowImageLoaded = true;
-});
-
 var activePiece = null;
 var offset = { x: 0, y: 0 };
 var snapOffset = 30;
@@ -73,15 +69,6 @@ imgPast.addEventListener('load', function () {
   var keyHeight = pieceHeight * 3 / 7;
 
   var status = 0;
-
-  const body = document.querySelector('body');
-  function preventLongPress(e) {
-      e.preventDefault && e.preventDefault();
-  }
-  body.addEventListener('contextmenu', preventLongPress);
-  body.addEventListener('touchstart', preventLongPress);
-  body.addEventListener('touchmove', preventLongPress);
-  body.addEventListener('touchend', preventLongPress);
 
   for (var i = 0; i < pieceColumn; i++) {
     for (var j = 0; j < pieceRow; j++) {
@@ -138,6 +125,15 @@ imgPast.addEventListener('load', function () {
       shufflePieces();
     }
   }
+
+  const body = document.body;
+  function preventLongPress(e) {
+      e.preventDefault && e.preventDefault();
+  }
+  body.addEventListener('contextmenu', preventLongPress);
+  body.addEventListener('touchstart', preventLongPress);
+  body.addEventListener('touchmove', preventLongPress);
+  body.addEventListener('touchend', preventLongPress);
 
   // 드래그 드랍 코드
   // 터치스크린 대응 추가
