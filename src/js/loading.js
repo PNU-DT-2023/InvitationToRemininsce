@@ -8,6 +8,7 @@ const loadingBarLine = document.querySelector(".loading-bar .line-box .line");
 const goBtn = document.querySelector("#go-btn");
 const buttonWrapper = document.querySelector(".button-wrapper");
 const title = document.querySelector(".title");
+const decoText = document.querySelectorAll(".deco-text");
 let currentIndex = 0;
 let totalLoadingTime = 6000; //총 로딩시간
 initMessage();
@@ -42,28 +43,33 @@ function drawLine () {
         dimSolid.style.transition = 'opacity 8s ease-in';
         dimSolid.style.opacity = '0.6';
         path.addEventListener('transitionend', () => {
-            loadingBar.style.display = 'none';
-            setTimeout(fillEnvelope, 1000);
+            setTimeout(fillEnvelope, 2000);
         });  
 }
 function showTItle () {
-    title.style.transition = 'opacity 3s ease-in';
+    title.style.transition = 'opacity .3s ease-in';
     title.style.opacity = '1';
-    title.style.display = 'block';
     loadingBar.style.display ='block';
 }
 function fillEnvelope () {
     envelopeFill.style.transition = 'opacity 2s ease';
     envelopeFill.style.opacity = '1';
     buttonWrapper.style.display = 'flex';
+    showDecoText();
+}
+function showDecoText () {
+    decoText.forEach((e) => {
+        e.style.opacity = 1;
+    })
 }
 
 setTimeout(() => {
     drawLine();
     dimSolid.classList.add("loading-animation");
+    loadingBarLine.classList.add("loading-start");
     setTimeout(showNextMessage, 2000);
     setTimeout(showTItle, 2000);
-}, 2000);
+}, 1000);
 
 goBtn.addEventListener('click', () => {
     location.href = '../puzzlepage.html';

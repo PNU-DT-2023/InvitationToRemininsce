@@ -10,43 +10,10 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-#envelope-outline {
-    position: absolute;
-    width: 80%;
-    margin: 50px;
-    z-index: 99;
-}
-
-#line {
-    stroke-width: 1;
-    stroke: white;
-}
-
-#envelope-filled {
-    position: absolute;
-    width: 80%;
-    margin: 50px;
-    z-index: 1;
-    opacity: 0;
-}
-
-
-.title {
-    font-family: 'Catalina Village';
-    font-weight: bold;
-    text-align: center;
-    font-size: 60px;
-
-    max-height: 30%;
-    object-fit: cover;
-    max-width: 80%;
-    display: none;
 }
 
 #background-img {
@@ -54,22 +21,7 @@
     height: 100%;
     object-fit: cover;
     filter: blur(5px);
-}
-
-.text-layer {
-    position: relative;
-    height: 100%;
-    max-width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 99;
-    mix-blend-mode: difference;
-}
-.loading-message p{
-    font-family: 'NeoDunggeunmo';
-    font-size: 24px;
+    z-index: -99;
 }
 
 .dim-solid {
@@ -79,9 +31,102 @@
     height: 100%;
     background-color: black;
     opacity: 1;
-    z-index: 0;
+    z-index: -90;
 }
 
+/* 초대장영역 */
+.envelope-bg {
+    position: relative;
+    width: 70vw;
+    height: 40vw;
+    z-index: 99;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+/* 초대장 채워진 이미지 */
+#envelope-filled {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: fill;
+}
+/* 초대장 외곽선 svg 프레임 */
+#envelope-outline {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+/* 초대장 외곽선 애니메이션용 path  */
+#line {
+    stroke-width: 1;
+    stroke: white;
+}
+
+/* 글자영역 */
+.text-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    mix-blend-mode: difference;
+    box-sizing: border-box;
+    padding: 2vw;
+    
+}
+#title-div {
+    display: flex;
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 50vw;
+    height: 100%;
+    align-items: end;
+    overflow: hidden;
+}
+img.title {
+    font-family: 'Catalina Village';
+    font-weight: bold;
+    text-align: center;
+    font-size: 60px;
+    width: 100%;
+    /* max-width: 50vw; */
+    /* height: auto; */
+    object-fit: contain;
+    position: relative;
+    display: block;
+    opacity: 0;
+}
+.deco-text {
+    align-self: start;
+    font-size: 24px;
+    font-family: 'lora',serif;
+    max-width: 60%;
+    padding: 2vw;
+    opacity: 0;
+}
+.deco-text#time {
+    justify-self: end;
+    text-align: right;
+}
+.center-section {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-self: center;
+}
+.loading-message p{
+    font-family: 'NeoDunggeunmo';
+    font-size: 24px;
+    text-align: center;
+}
 .loading-bar {
     width: 100%;
     height: auto;
@@ -93,7 +138,7 @@
 
 .loading-bar .line-box {
     padding: 0.4px;
-    width: 500px;
+    width: 100%;
     height: 14px;
     border: 2px solid #ffffff;
     align-items: center;
@@ -102,12 +147,13 @@
 .loading-bar .line-box .line {
     height: 14px;
     background: #ffffff;
-    animation: loading 6s forwards ease-in;
-    animation-delay: .5s;
     align-items: center;
     width: 0%;
 }
 
+.loading-bar .line-box .line.loading-start {
+    animation: loading 6s forwards ease-in;
+}
 
 @keyframes loading {
     /* 기존 스타일 유지 */
@@ -139,13 +185,13 @@
 }
 
 .button-wrapper > #go-btn {
-    width: 50%;
+    width: 80%;
     height: 60px;
     max-height: 80px;
     line-height: 60px;
-    color: white;
+    color: black;
     border-radius: 40px;
-    background-color: black;
+    background-color: white;
     transition: .3s;
 }
 
