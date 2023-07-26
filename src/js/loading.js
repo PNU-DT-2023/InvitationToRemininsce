@@ -47,7 +47,7 @@ function drawLine () {
         dimSolid.style.transition = 'opacity 8s ease-in';
         dimSolid.style.opacity = '0.6';
         path.addEventListener('transitionend', () => {
-            setTimeout(fillEnvelope, 2000);
+            setTimeout(fillEnvelope, 100);
         });  
 }
 function showTItle () {
@@ -59,12 +59,16 @@ function fillEnvelope () {
     envelopeFill.style.transition = 'opacity 2s ease';
     envelopeFill.style.opacity = '1';
     buttonWrapper.style.display = 'flex';
+    hideLoadingBar();
     showDecoText();
 }
 function showDecoText () {
     decoText.forEach((e) => {
         e.style.opacity = 1;
     })
+}
+function hideLoadingBar () {
+    loadingBar.style.display = 'none';
 }
 
 setTimeout(() => {
