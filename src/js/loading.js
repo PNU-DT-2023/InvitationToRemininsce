@@ -1,4 +1,5 @@
 const dimSolid = document.querySelector(".dim-solid");
+const textLayout = document.querySelector(".text-layer");
 const messages = document.querySelectorAll(".loading-message>p");
 const path = document.querySelector("#line"); //편지외곽선
 const envelopeBox = document.querySelector("#envelope-outline");
@@ -17,7 +18,10 @@ const length = path.getTotalLength();
 path.style.strokeDasharray = length;
 path.style.strokeDashoffset = length;
 
-
+window.onload = function() {
+    envelopeBox.style.display = 'block';
+    textLayout.style.display = 'grid';
+};
 
 function showNextMessage() {
     const currentMessage = messages[currentIndex];
