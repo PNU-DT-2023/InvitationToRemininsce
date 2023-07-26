@@ -99,5 +99,5 @@ setTimeout(() => {
 }, 1000);
 
 goBtn.addEventListener('click', () => {
-    location.href = '../puzzlepage.html';
+    location.href = './puzzlepage.html';
 })
