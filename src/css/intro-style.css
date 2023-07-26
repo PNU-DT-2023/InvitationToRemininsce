@@ -6,6 +6,9 @@
 }
 
 @import url(main.css);
+body {
+    margin: 0;
+}
 
 /* 전체 화면을 기준으로 컨테이너를 가운데로 정렬하기 위한 스타일 */
 .container {
