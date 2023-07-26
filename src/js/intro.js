@@ -14,7 +14,7 @@ envelope.onclick = function() {
             text.style.display = 'none'; // 텍스트를 숨깁니다.
 
             setTimeout(function() {
-                envelope.src = "envelope3.png"; // 1초 후 이미지를 'envelope3.png'로 변경
+                envelope.src = "./src/img/intro/envelope3.png"; // 1초 후 이미지를 'envelope3.png'로 변경
                 setTimeout(function() {
                     const startSection = document.getElementById('start');
                     const loadingSection = document.getElementById('loading');
