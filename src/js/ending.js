@@ -24,7 +24,6 @@ const watchingMode = () => {
 const startEnding = () => {
     frame.classList.add('contract-animation');
     frame.addEventListener('animationend', () => {
-        console.log('show');
         ui.classList.add('show-animation');
         
         homeButton.addEventListener('click', moveToHome);
