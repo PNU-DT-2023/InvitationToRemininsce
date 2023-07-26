@@ -1,3 +1,4 @@
+
 const envelope = document.getElementById('envelope');
 const text = document.querySelector('.wrapper > p'); // 텍스트 요소 가져오기
 let animationActive = false; // 애니메이션이 작동중인지 여부를 나타내는 변수
@@ -24,7 +25,7 @@ envelope.onclick = function() {
 
                 envelope.style.animation = 'none'; // 애니메이션 효과 제거
                 animationActive = false; // 애니메이션이 끝났음을 표시
-                location.href = '../loading-page.html';
+                location.href = './loading-page.html';
                 
             }, 1500); // 1초 후 실행
 
