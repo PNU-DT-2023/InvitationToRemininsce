@@ -20,7 +20,7 @@ function init() {
     // invert the geometry on the x-axis so that all of the faces point inward
     geometry.scale( - 1, 1, 1 );
 
-    const texture = new THREE.TextureLoader().load( '../../src/img/pano_test.png' );
+    const texture = new THREE.TextureLoader().load( '../../src/img/pano.png' );
     texture.colorSpace = THREE.SRGBColorSpace;
     const material = new THREE.MeshBasicMaterial( { map: texture } );
 
