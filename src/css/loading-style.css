@@ -179,40 +179,36 @@ img.title {
 }
 
 .button-wrapper {
-    width: 30%;
-    height: 24%;
     display: none;
     text-align: center;
-    font-size: 24px;
+    padding: 20px 0;
+    font-size: 20px;
     flex-direction: column;
     align-items: center;
-    position: absolute;
     justify-content: end;
     z-index: 99;
-    font-family: 'NeoDunggeunmo';
 }
 
 .button-wrapper>p{
     display: block;
-    padding: 0 0 30px 0;
+    padding: 0 0 10px 0;
     color: #333;
 }
 
 .button-wrapper > #go-btn {
     /* 기존 스타일 유지 */
-    width: 100px;
-    height: 40px;
+    width: 50%;
     max-height: 80px;
-    line-height: 60px;
+    line-height: 40px;
+    padding: 4px;
+    margin-bottom: auto;
     color: black;
     border-radius: 40px;
     text-align: center;
     justify-content: center;
     background-color: white;
     transition: .3s;
-    /* 아래 스타일이 추가된 스타일입니다. */
-    display: flex;
-    align-items: center;
+    font-family: 'NeoDunggeunmo';
 }
 
 
