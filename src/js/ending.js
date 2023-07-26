@@ -1,5 +1,5 @@
 import { init, animate, update } from './viewer.js'
-
+ 
 const frame = document.querySelector('.content-wrapper');
 const ui = document.querySelector('.ui-wrapper');
 
