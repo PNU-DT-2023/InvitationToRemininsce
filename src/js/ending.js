@@ -1,3 +1,5 @@
+import { init, animate, update } from './viewer.js'
+
 const frame = document.querySelector('.content-wrapper');
 const ui = document.querySelector('.ui-wrapper');
 
@@ -8,11 +10,15 @@ const offPopupButton = document.getElementById("watching-mode-btn");
 const moveToHome = () => {
     location.href = './index.html';
 }
-const hideUI = () => {
+const watchingMode = () => {
     ui.classList.remove('show-animation');
     homeButtonSmall.classList.add('show');
     homeButtonSmall.addEventListener('click', moveToHome);
     homeButtonSmall.addEventListener('touch', moveToHome);
+
+    // 파노라마뷰 시작
+    init();
+    animate();
 }
 
 const startEnding = () => {
@@ -23,8 +29,8 @@ const startEnding = () => {
         
         homeButton.addEventListener('click', moveToHome);
         homeButton.addEventListener('touch', moveToHome);
-        offPopupButton.addEventListener('click',hideUI);   
-        offPopupButton.addEventListener('touch',hideUI);
+        offPopupButton.addEventListener('click',watchingMode);   
+        offPopupButton.addEventListener('touch',watchingMode);
     })
 }
 
