@@ -1,54 +1,303 @@
-@import url(/src/css/main.css);
-
- .container {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
- }
-
- #image-past {
-    position: absolute;
-    width: var(--frame-width);
-    height: var(--frame-heigth);
-    overflow: hidden;
-    background-color: black;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
- }
-
- #image-past img {
-    position: absolute;
-    /* height: 100vh; */
-    margin: 0;
-    border: 3px solid #000;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
- }
+@import url('main.css');
+@import url('puzzle-style.css');
+@import url("https://use.typekit.net/ndy1clu.css");
 
  /* 점점 넓어지는 애니메이션 */
- .expand-animation {
-    animation-name: expand;
-    animation-duration: 3s;
-    animation-fill-mode: forwards;
-  }
+ .contract-animation {
+   animation-name: contract;
+   animation-duration: 3s;
+   animation-fill-mode: forwards;
+ }
 
- @keyframes expand {
-    0% {
-        width: var(--frame-width);
-        height: var(--frame-heigth);
-    }
-    
-    100% {
-        width: 100%;
-        height: 100%;
-    }
-  }
-  
+@keyframes contract {
+   0% {
+       width: 100%;
+       height: 100%;
+       border-radius: 0px;
+   }
+   
+   100% {
+       width: var(--ending-frame-width);
+       height: var(--ending-frame-height);
+       border-radius: 40px;
+   }
+ }
+
+
+:root {
+   --ending-frame-width: calc(100vw - 72px);
+   --ending-frame-height: calc(100vh - 76px);
+}
+
+.container {
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: black;
+}
+
+.content-wrapper {
+   position: relative;
+   display: flex;
+   width: 100%;
+   height: 100%;
+   /* border-radius: 40px;
+   width: var(--ending-frame-width);
+   height: var(--ending-frame-height); */
+   overflow: hidden;
+   align-items: center;
+   justify-content: center;
+   z-index: 9;
+}
+
+.content-wrapper::after {
+   content: " ";
+   position: absolute;
+   display: block;
+   width: 97%;
+   height: 97%;
+   border-radius: 38px;
+   border: 1.5px solid #000; 
+   box-sizing: border-box;  
+   margin: 50px;
+   z-index: 0;
+}
+
+.ui-wrapper {
+   opacity: 0;
+   position: relative;
+   max-width: 99%;
+   min-width: 99%;
+   height: 100%;
+   z-index: 1;
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   grid-auto-rows: minmax(50px, auto);
+   align-items: center;
+   justify-content: center;
+   padding: 40px;
+   box-sizing: border-box;
+   color: white;
+   flex-shrink: 0;
+}
+
+/* left,right section */
+.side-wrapper {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   font-family: 'Lora', sans-serif !important;
+   font-weight: bold;
+}
+
+.side-wrapper#left {
+   text-align: left;
+   align-items: flex-start;
+}
+
+#address {
+   font-family: 'Lora', sans-serif !important;
+   font-weight: bold;
+   max-width: 80%;
+   font-size: 20px;
+   overflow-y: scroll;
+}
+
+#arrow {
+   justify-content: start;
+   max-height : 80%;
+   overflow: hidden;
+}
+
+
+/* 가운데 영역 */
+.center-wrapper {
+   height: 100%;
+   display: grid;
+   grid-template-rows: 1fr 3fr 1fr;
+   text-align: center;
+   justify-content: center;
+}
+.center-wrapper #title {
+   max-width: 100%;
+   align-self: start;
+}
+
+/* 팝업 */
+#ending-popup {
+   color: black;
+   border-radius: 16px;
+   border: 2px solid #000;   
+   background: #F5EFEB;
+   position: relative;
+   flex-direction: column;
+   justify-content: space-between;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   justify-items: center;
+   align-self: center;
+   padding: 10%;
+   max-height: 50%;
+   max-width: 100%;
+   z-index: 10;
+}
+
+/* 팝업 데코 라인 */
+#ending-popup::after {
+   content: " ";
+   position: absolute;
+   display: block;
+   width: 97%;
+   height: 95%;
+   border-radius: 16px;
+   border: 1px solid #000; 
+   box-sizing: border-box;  
+   margin: 50px;
+   z-index: 0;
+}
+/* 팝업 문구 */
+#ending-popup > p {
+   font-size: 16px;
+   flex-wrap: wrap;
+   line-height: 140%;
+   max-width: 100%;
+   max-height: auto;
+   padding: 0 0 40px 0 ;
+   max-height: 100%;
+   position: relative;
+   overflow-y: scroll;
+}
+
+/* 스크롤바 없애기 */
+::-webkit-scrollbar {
+   display: none;
+ }
+
+/* 팝업 CTA */
+button#watching-mode-btn {
+   padding: 12px;
+   border-radius: 32px;
+   border: 2px solid #000;
+   min-width: 60%;
+   z-index: 1;
+}
+button#watching-mode-btn:hover {
+   background-color: white;
+   transform: scale(1.1);
+   cursor: zoom-in;
+}
+
+/* TEAMWEB LOGO*/
+.center-wrapper>:last-child {
+   align-self: end;
+}
+
+/* 우측영역 */
+
+#date {
+   font-family: 'Lora', sans-serif !important;
+   font-weight: bold;
+   font-size: 20px;
+   text-align: right;
+}
+
+#home-btn {
+   background-color: inherit ;
+   border: none;
+   outline: none;
+   right: 0;
+   display: flex;
+   justify-content: right;
+   transition: .3s;
+}
+
+#home-btn:hover {
+   transform: scale(1.1);
+}
+#home-btn > div {
+   position: relative;
+   width: 100px;
+   height: 100px;
+}
+
+#home-btn > div > p {
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   line-height: 100px;
+   text-align: center;
+}
+/* 감상모드시 홈버튼 */
+#home-btn-s {
+   display: none;
+   position: fixed;
+   top: 20px;
+   right: 20px;
+   transition: .1s;
+}
+#home-btn-s.show {
+   display: block;
+}
+#home-btn-s.show :hover {
+   transform: scale(1.1);
+}
+
+#image-now-bg{
+   opacity: 1;
+   position: absolute;
+   height: 100vh;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   object-fit: cover;
+   z-index: 0;
+}
+
+.show-animation {
+   animation-name: show;
+   animation-duration: 1s;
+   animation-fill-mode: forwards;
+}
+@keyframes show {
+   0% {
+       opacity: 0;
+   }
+   
+   100% {
+       opacity: 1;
+   }
+ } 
+
+
+
+
+@media screen and (max-height: 600px) {
+   #arrow {
+      max-height : 40%;
+   }
+   #ending-popup {
+      max-height : 40%;
+      font-size : 16px;
+   }
+   .center-wrapper #title {
+      max-height : 30%;
+   }
+
+   .ui-wrapper {
+      font-size: 12px;
+   }
+   
+   #address {
+      font-size: 12px;
+   }
+   #ending-popup > p {
+      font-size: 9px;
+   }
+   button#watching-mode-btn {
+      font-size: 9px;
+   }
+}

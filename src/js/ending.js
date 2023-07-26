@@ -1,25 +1,37 @@
-const imgContainer = document.querySelector('#image-past');
-const img = document.querySelector('#image-past img');
+import { init, animate, update } from './viewer.js'
 
-// 확장 애니메이션
-setTimeout(() => {
-    imgContainer.classList.toggle('expand-animation');
-}, 1000);
+const frame = document.querySelector('.content-wrapper');
+const ui = document.querySelector('.ui-wrapper');
 
-// (임시)마우스 움직이면 이미지 변형
-setTimeout(() => {
-    imgContainer.addEventListener('mousemove', tiltImage);
-}, 2000);
+const homeButton = document.getElementById("home-btn");
+const homeButtonSmall = document.getElementById("home-btn-s");
+const offPopupButton = document.getElementById("watching-mode-btn");
 
-function tiltImage(event) {
-    const xAxis = (window.innerWidth / 2 - event.clientX)*0.01 ;
-    const yAxis = (window.innerHeight / 2 - event.clientY)*0.01 ;
-    img.style.transform = `translate(-${50}%, -50%) skew(${xAxis}deg, ${yAxis}deg)`;
+const moveToHome = () => {
+    location.href = './index.html';
 }
-  
-imgContainer.addEventListener('mouseout', resetTilt);
+const watchingMode = () => {
+    ui.classList.remove('show-animation');
+    homeButtonSmall.classList.add('show');
+    homeButtonSmall.addEventListener('click', moveToHome);
+    homeButtonSmall.addEventListener('touch', moveToHome);
 
-// 초기화
-function resetTilt() {
-    img.style.transform = 'translate(-50%, -50%) skew(0)';
+    // 파노라마뷰 시작
+    init();
+    animate();
 }
+
+const startEnding = () => {
+    frame.classList.add('contract-animation');
+    frame.addEventListener('animationend', () => {
+        console.log('show');
+        ui.classList.add('show-animation');
+        
+        homeButton.addEventListener('click', moveToHome);
+        homeButton.addEventListener('touch', moveToHome);
+        offPopupButton.addEventListener('click',watchingMode);   
+        offPopupButton.addEventListener('touch',watchingMode);
+    })
+}
+
+setTimeout(startEnding, 1000);
