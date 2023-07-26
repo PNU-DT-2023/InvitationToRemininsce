@@ -23,6 +23,7 @@ window.onload = function() {
     textLayout.style.display = 'grid';
 };
 
+// 로딩 메세지 띄우기
 function showNextMessage() {
     const currentMessage = messages[currentIndex];
     if (currentMessage) {
@@ -32,6 +33,23 @@ function showNextMessage() {
             currentIndex++;
             showNextMessage();
         }, (totalLoadingTime/(messages.length)));
+    }
+}
+
+// 로딩 스티커 띄우기
+const stickerWrapper = document.querySelector(".stickers")
+const stickers = document.querySelectorAll(".stickers >*")
+let stickerIndex = 0;
+function showStickers() {
+    const sticker = stickers[stickerIndex];
+    if (sticker) {
+        sticker.style.display = 'block';
+        setTimeout(() => {
+            sticker.classList.add('showed');
+            sticker.style.opacity = 1;
+            stickerIndex++;
+            showStickers();
+        }, (totalLoadingTime/(stickers.length)));
     }
 }
 
@@ -75,6 +93,7 @@ setTimeout(() => {
     drawLine();
     dimSolid.classList.add("loading-animation");
     loadingBarLine.classList.add("loading-start");
+    showStickers()
     setTimeout(showNextMessage, 2000);
     setTimeout(showTItle, 2000);
 }, 1000);

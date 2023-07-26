@@ -1,5 +1,6 @@
 @import url(main.css);
 @import url(animation.css);
+@import url(sticker-style.css);
 
 @font-face {
     font-family: 'NeoDunggeunmo';
@@ -15,12 +16,14 @@
 
 .container {
     position: absolute;
-    width: 100%;
+    box-sizing: border-box;
+    width: 100vw;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
 #background-img {
@@ -34,7 +37,8 @@
 .dim-solid {
     content: "";
     position: absolute;
-    width: 100%;
+    width: 110vw;
+    margin: 0;
     height: 100%;
     background-color: black;
     opacity: 1;

@@ -1,0 +1,55 @@
+/* 로딩 스티커 css */
+
+
+.stickers {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}
+.stickers >* {
+    /* 최소 크기 지정 */
+    max-width: 30%;
+    max-height: 20%;
+    position: fixed;
+    display: none;
+    opacity: 0;
+    /* 올라가는 애니메이션 시간 조절 */
+    transition: opacity 0.2s, transform 150s;
+}
+.stickers >*.showed {
+    transform: translateY(-500%);
+    opacity: 1;
+}
+
+/* 개별 위치 설정 */
+.stickers :nth-child(1) {
+    top : 80%;
+    left: 0;
+}
+
+.stickers :nth-child(2) {
+    right : 10%;
+    max-height: 20%;
+}
+
+.stickers :nth-child(3) {
+    right : 15%;
+    top: 40%;
+}
+
+.stickers :nth-child(4) {
+    left : 10%;
+    top: 20%;
+}
+
+.stickers :nth-child(5) {
+    left: -5%;
+    bottom: 40%;
+}
+
+.stickers :nth-child(6) {
+    min-height: 30%;
+    right: 5%;
+    bottom: 10%;
+}
