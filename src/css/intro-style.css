@@ -1,0 +1,55 @@
+
+@import url(main.css);
+body {
+    margin: 0;
+}
+
+/* 전체 화면을 기준으로 컨테이너를 가운데로 정렬하기 위한 스타일 */
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    background-color: black;
+}
+
+/* 컨테이너 스타일 */
+.container {
+    text-align: center; /* 이미지와 텍스트를 가운데 정렬 */
+}
+
+
+/* 이미지 스타일 */
+#envelope {
+    display: block;
+    margin: auto;
+    width: 10rem;
+    height: auto;
+    cursor: pointer;
+    margin-bottom: 3rem;
+}
+
+@keyframes animate {
+    0%{transform: translate(1px, 1px) rotate(0deg);}
+    10%{transform: translate(-1px, -2px) rotate(-1deg);}
+    20%{transform: translate(-3px, 1px) rotate(1deg);}
+    30%{transform: translate(3px, 2px) rotate(0deg);}
+    40%{transform: translate(1px, -1px) rotate(1deg);}
+    50%{transform: translate(-1px, 2px) rotate(-1deg);}
+    60%{transform: translate(-3px, 1px) rotate(0deg);}
+    70%{transform: translate(3px, 1px) rotate(-1deg);}
+    80%{transform: translate(-1px, -1px) rotate(1deg);}
+    90%{transform: translate(1px, 2px) rotate(0deg);}
+    100%{transform: translate(1px, -2px) rotate(-1deg);}
+
+}
+
+/* 텍스트 스타일 */
+.wrapper {
+    color: white;
+    font-size: 1.4rem;
+}

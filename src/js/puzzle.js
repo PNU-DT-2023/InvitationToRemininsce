@@ -14,8 +14,8 @@ const pieceShape = [
 ];
 
 const imageSrcURL = { 
-  past : 'src/img/puzzlesample-past-wide.jpg',
-  now : 'src/img/puzzlesample-now-wide.jpg',
+  past : 'src/img/past.png',
+  now : 'src/img/now.png',
 }
 export default imageSrcURL;
 
@@ -45,6 +45,11 @@ imgPast.addEventListener('load', function () {
   const boardImage = document.getElementById('image-now');
   //js에서 퍼즐 현재 이미지 삽입
   const imageNowElement = document.querySelector('#image-now img');
+  
+  setTimeout(() => {
+    boardImage.style.display = 'block';
+  }, 100);
+ 
   imageNowElement.src = bgImage.src;
   backgroundImage.src = image.src;
   const backgroundSize = window.getComputedStyle(boardImage);
