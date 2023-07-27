@@ -41,7 +41,7 @@
     height: var(--frame-height);
     width: var(--frame-width);
     border: 20px solid;
-    border-image: url('/src/img/wave.png') 33 round;
+    border-image: url('../img/wave.png') 33 round;
 }
 
 #image-now img {
