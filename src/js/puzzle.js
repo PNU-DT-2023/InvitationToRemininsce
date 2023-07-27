@@ -26,10 +26,9 @@ imgNow.src = imageSrcURL.now;
 
 var activePiece = null;
 var offset = { x: 0, y: 0 };
-var snapOffset = 20;
+var snapOffset = 30;
 var pieceRow = 4;
 var pieceColumn = 3;
-var pieceBorderSize = 2;
 
 var solveButton = document.getElementById('puzzle-solve');
 var progressNum = document.getElementById('progress-text');
@@ -38,19 +37,13 @@ var backgroundImage = document.querySelector('#image-now-bg img');
 const loadingIcon = document.getElementById('loading-icon');
 
 //이미지 잘라서 퍼즐조각 만드는 코드(직사각형)
-imgPast.addEventListener('load', function () {
-
-  const image = resizeImage(imgPast);
-  const bgImage = resizeImage(imgNow);
+imgPast.addEventListener('load', async function () {
+  const image = await resizeImage(imgPast);
+  const bgImage = await resizeImage(imgNow);
 
   const boardImage = document.getElementById('image-now');
   //js에서 퍼즐 현재 이미지 삽입
   const imageNowElement = document.querySelector('#image-now img');
-  
-  setTimeout(() => {
-    boardImage.style.display = 'block';
-  }, 100);
- 
   imageNowElement.src = bgImage.src;
   backgroundImage.src = image.src;
   const backgroundSize = window.getComputedStyle(boardImage);
@@ -102,7 +95,6 @@ imgPast.addEventListener('load', function () {
       
       pieceWrap.id = 'piece' + pieceNum;
       pieceWrap.className = 'puzzle-piece';
-      
       var pieceInner = document.createElement('div');
       pieceInner.className = 'puzzle-piece-inner';
       pieceInner.style.width = pieceWidth + keyWidth + 'px';
@@ -133,6 +125,15 @@ imgPast.addEventListener('load', function () {
     }
   }
 
+  const body = document.body;
+  function preventLongPress(e) {
+      e.preventDefault && e.preventDefault();
+  }
+  body.addEventListener('contextmenu', preventLongPress);
+  body.addEventListener('touchstart', preventLongPress);
+  body.addEventListener('touchmove', preventLongPress);
+  body.addEventListener('touchend', preventLongPress);
+
   // 드래그 드랍 코드
   // 터치스크린 대응 추가
   puzzlePieces.forEach(function (piece, pieceIdx) {
@@ -145,6 +146,7 @@ imgPast.addEventListener('load', function () {
         const startY = e.clientY || e.touches[0].clientY;
         offset.x = startX - piece.offsetLeft;
         offset.y = startY - piece.offsetTop;
+        piece.classList.add('active');
       }
     }
 
@@ -154,7 +156,6 @@ imgPast.addEventListener('load', function () {
         const currentX = e.clientX || e.touches[0].clientX;
         const currentY = e.clientY || e.touches[0].clientY;
 
-
         piece.style.left = currentX - offset.x + 'px';
         piece.style.top = currentY - offset.y + 'px';
       }
@@ -163,6 +164,7 @@ imgPast.addEventListener('load', function () {
     function handleMouseUp(e){
       e.preventDefault();
       activePiece = null;
+      piece.classList.remove('active');
 
       //스냅 (mouseup에서 판정)
       //안맞는 위치에 있어도 스냅은 되도록.
@@ -216,7 +218,7 @@ imgPast.addEventListener('load', function () {
 
   //////functions//////
 
-  function resizeImage(sourceImage){
+  async function resizeImage(sourceImage) {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     if (sourceImage.width <= viewportWidth && sourceImage.height <= viewportHeight) {
@@ -224,21 +226,26 @@ imgPast.addEventListener('load', function () {
     }
 
     const canvas = document.createElement('canvas');
-  canvas.width = viewportWidth;
-  canvas.height = viewportHeight;
+    canvas.width = viewportWidth;
+    canvas.height = viewportHeight;
 
-  const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
 
-  const scaleFactor = Math.max(viewportWidth / sourceImage.width, viewportHeight / sourceImage.height);;
-  const scaledWidth = sourceImage.width * scaleFactor;
-  const scaledHeight = sourceImage.height * scaleFactor;
+    const scaleFactor = Math.max(viewportWidth / sourceImage.width, viewportHeight / sourceImage.height);;
+    const scaledWidth = sourceImage.width * scaleFactor;
+    const scaledHeight = sourceImage.height * scaleFactor;
 
-  ctx.drawImage(sourceImage, 0, 0, scaledWidth, scaledHeight);
+    ctx.drawImage(sourceImage, 0, 0, scaledWidth, scaledHeight);
 
-  const resizedImage = new Image();
-  resizedImage.src = canvas.toDataURL('image/jpeg', 1.0);
-
-  return resizedImage;
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        const resizedImage = new Image();
+        resizedImage.onload = () => {
+          resolve(resizedImage);
+        };
+        resizedImage.src = URL.createObjectURL(blob);
+      }, 'image/jpeg', 1.0);
+    });
   }
 
   //퍼즐조각 랜덤 위치에 배치
@@ -286,5 +293,4 @@ imgPast.addEventListener('load', function () {
       piece.classList.add("rightplace");
     });
   }
-
 });
