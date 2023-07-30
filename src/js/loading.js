@@ -91,7 +91,7 @@ function hideLoadingBar () {
 
 
 goBtn.addEventListener('click', () => {
-    location.href = '../puzzlepage.html';
+    location.href = './puzzlepage.html';
 })
 
 const startLoading = () => {

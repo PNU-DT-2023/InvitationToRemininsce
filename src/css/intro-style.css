@@ -1,9 +1,3 @@
-@font-face {
-    font-family: 'NeoDunggeunmo';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 
 @import url(main.css);
 body {
@@ -33,9 +27,10 @@ body {
 #envelope {
     display: block;
     margin: auto;
-    width: 130px;
+    width: 10rem;
     height: auto;
     cursor: pointer;
+    margin-bottom: 3rem;
 }
 
 @keyframes animate {
@@ -56,7 +51,7 @@ body {
 /* 텍스트 스타일 */
 .wrapper {
     color: white;
-    font-family: 'NeoDunggeunmo';
+  font-family: 'NeoDunggeunmo';
     font-size: 2rem;
     margin-top: 40px;
 }

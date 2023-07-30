@@ -1,5 +1,5 @@
 import { init, animate, update } from './viewer.js'
-
+ 
 const frame = document.querySelector('.content-wrapper');
 const ui = document.querySelector('.ui-wrapper');
 
@@ -24,7 +24,6 @@ const watchingMode = () => {
 const startEnding = () => {
     frame.classList.add('contract-animation');
     frame.addEventListener('animationend', () => {
-        console.log('show');
         ui.classList.add('show-animation');
         
         homeButton.addEventListener('click', moveToHome);
