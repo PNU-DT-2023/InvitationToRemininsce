@@ -110,13 +110,7 @@
     overflow: hidden;
 }
 img.title {
-    font-family: 'Catalina Village';
-    font-weight: bold;
-    text-align: center;
-    font-size: 60px;
     width: 100%;
-    /* max-width: 50vw; */
-    /* height: auto; */
     object-fit: contain;
     position: relative;
     display: block;
@@ -124,7 +118,7 @@ img.title {
 }
 .deco-text {
     align-self: start;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: 'lora',serif;
     max-width: 60%;
     padding: 2vw;
@@ -142,7 +136,7 @@ img.title {
 }
 .loading-message p{
     font-family: 'NeoDunggeunmo';
-    font-size: 20px;
+    font-size: 1.5rem;
     text-align: center;
 }
 
@@ -188,7 +182,7 @@ img.title {
     width: 30%;
     display: none;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 2rem;
     flex-direction: column;
     align-items: center;
     position: absolute;
