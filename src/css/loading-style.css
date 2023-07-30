@@ -164,19 +164,16 @@ img.title {
     background: #ffffff;
     align-items: center;
     width: 0%;
+    transition: width .3s;
 }
 
 .loading-bar .line-box .line.loading-start {
-    animation: loading 6s forwards ease-in;
+    /* animation: loading 6s forwards ease-in;  */
 }
 
 @keyframes loading {
-    /* 기존 스타일 유지 */
     0% {
         width: 0%;
-    }
-    100% {
-        width: 100%;
     }
     100% {
         width: 100%;

@@ -23,11 +23,12 @@ window.onload = function() {
     textLayout.style.display = 'grid';
 };
 
-// 로딩 메세지 띄우기
+// 로딩 메세지 띄우기 & 로딩바 채우기
 function showNextMessage() {
     const currentMessage = messages[currentIndex];
     if (currentMessage) {
         currentMessage.style.display = 'block';
+        loadingBarLine.style.width = `${100 * (currentIndex+1) / messages.length}%`;
         setTimeout(() => {
             currentMessage.style.display = 'none';
             currentIndex++;
@@ -60,15 +61,16 @@ function initMessage () {
 }
 
 function drawLine () {
-        path.style.transition = 'stroke-dashoffset 8s ease-in';
-        path.style.strokeDashoffset = '0'; 
-        dimSolid.style.transition = 'opacity 8s ease-in';
+        path.style.transition = `stroke-dashoffset ${totalLoadingTime/1000}s ease-in`;
+        path.style.strokeDashoffset = '0';
+        dimSolid.style.transition = `opacity ${totalLoadingTime/1000}s ease-in`;
         dimSolid.style.opacity = '0.6';
-        path.addEventListener('transitionend', () => {
-            setTimeout(fillEnvelope, 100);
-        });  
+        setTimeout(() => {
+            showStartBtn();
+        }, totalLoadingTime + 100);
+            
 }
-function showTItle () {
+function showTitle () {
     title.style.transition = 'opacity .3s ease-in';
     title.style.opacity = '1';
     loadingBar.style.display ='block';
@@ -77,8 +79,6 @@ function fillEnvelope () {
     envelopeFill.style.transition = 'opacity 2s ease';
     envelopeFill.style.opacity = '1';
     buttonWrapper.style.display = 'flex';
-    hideLoadingBar();
-    showDecoText();
 }
 function showDecoText () {
     decoText.forEach((e) => {
@@ -89,15 +89,25 @@ function hideLoadingBar () {
     loadingBar.style.display = 'none';
 }
 
-setTimeout(() => {
-    drawLine();
-    dimSolid.classList.add("loading-animation");
-    loadingBarLine.classList.add("loading-start");
-    showStickers()
-    setTimeout(showNextMessage, 2000);
-    setTimeout(showTItle, 2000);
-}, 1000);
 
 goBtn.addEventListener('click', () => {
     location.href = '../puzzlepage.html';
 })
+
+const startLoading = () => {
+    drawLine();
+    dimSolid.classList.add("loading-animation");
+    loadingBarLine.classList.add("loading-start");
+    showStickers();
+    showNextMessage();
+    showTitle();
+}
+
+const showStartBtn = () => {
+    fillEnvelope();
+    hideLoadingBar();
+    showDecoText();
+}
+setTimeout(() => {
+    startLoading();
+}, 100);

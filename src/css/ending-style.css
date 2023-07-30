@@ -43,9 +43,6 @@
    display: flex;
    width: 100%;
    height: 100%;
-   /* border-radius: 40px;
-   width: var(--ending-frame-width);
-   height: var(--ending-frame-height); */
    overflow: hidden;
    align-items: center;
    justify-content: center;
@@ -101,8 +98,8 @@
 #address {
    font-family: 'Lora', sans-serif !important;
    font-weight: bold;
-   max-width: 80%;
-   font-size: 20px;
+   max-width: 40%;
+   font-size: 1rem;
    overflow-y: scroll;
 }
 
@@ -140,7 +137,7 @@
    justify-content: center;
    justify-items: center;
    align-self: center;
-   padding: 10%;
+   padding: 3rem 2rem;
    max-height: 50%;
    max-width: 100%;
    z-index: 10;
@@ -161,12 +158,12 @@
 }
 /* 팝업 문구 */
 #ending-popup > p {
-   font-size: 16px;
+   font-size: 1.2rem;
    flex-wrap: wrap;
    line-height: 140%;
-   max-width: 100%;
+   width: 100%;
    max-height: auto;
-   padding: 0 0 40px 0 ;
+   padding: 0 0 2rem 0 ;
    max-height: 100%;
    position: relative;
    overflow-y: scroll;
