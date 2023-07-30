@@ -6,6 +6,7 @@ const ui = document.querySelector('.ui-wrapper');
 const homeButton = document.getElementById("home-btn");
 const homeButtonSmall = document.getElementById("home-btn-s");
 const offPopupButton = document.getElementById("watching-mode-btn");
+const notice = document.getElementById("swipeNotice");
 
 const moveToHome = () => {
     location.href = './index.html';
@@ -19,6 +20,10 @@ const watchingMode = () => {
     // 파노라마뷰 시작
     init();
     animate();
+    showNotice();
+    const container = document.querySelector('.container');
+    container.addEventListener('click',hideNotice);
+    container.addEventListener('touch',hideNotice);
 }
 
 const startEnding = () => {
@@ -31,6 +36,19 @@ const startEnding = () => {
         offPopupButton.addEventListener('click',watchingMode);   
         offPopupButton.addEventListener('touch',watchingMode);
     })
+}
+const showNotice = () => {
+   notice.style.display = 'block';
+   setTimeout(() => {
+    notice.style.opacity = 1;
+   }, 100);
+   setTimeout(() => {
+    hideNotice();
+   }, 5000);
+}
+
+const hideNotice = () => {
+    notice.style.opacity = 0;
 }
 
 setTimeout(startEnding, 1000);

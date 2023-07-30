@@ -286,3 +286,11 @@ button#watching-mode-btn:hover {
       max-height : 30%;
    }
 }
+
+#swipeNotice {
+   display: none;
+   position:fixed;
+   z-index: 999;
+   opacity: 0;
+   transition: .5s;
+}
