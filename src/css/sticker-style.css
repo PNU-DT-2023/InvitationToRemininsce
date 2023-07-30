@@ -24,6 +24,7 @@
 
 /* 개별 위치 설정 */
 .stickers :nth-child(1) {
+    transition: transform 100s;
     top : 80%;
     left: 0;
 }
@@ -31,10 +32,10 @@
 .stickers :nth-child(2) {
     right : 10%;
     max-height: 20%;
+    top: 50%;
 }
-
 .stickers :nth-child(3) {
-    right : 15%;
+    left : 29%;
     top: 40%;
 }
 
@@ -44,12 +45,44 @@
 }
 
 .stickers :nth-child(5) {
-    left: -5%;
-    bottom: 40%;
+    right: -5%;
+    bottom: 50%;
 }
 
 .stickers :nth-child(6) {
     min-height: 30%;
     right: 5%;
-    bottom: 10%;
+    bottom: -10%;
+}
+
+.stickers :nth-child(7) {
+    left: 3%;
+    bottom: 20%;
+}
+.stickers :nth-child(8) {
+    left: 1%;
+    bottom: 50%;
+}
+.stickers :nth-child(9) {
+    right: 10%;
+    bottom: -10%;
+}
+
+.stickers :nth-child(10) {
+    left: 15%;
+    top: 10%;
+}
+
+.stickers :nth-child(11) {
+    right: 30%;
+    bottom: 5%;
+}
+
+.stickers :nth-child(12) {
+    right: -1%;
+    top: 5%;
+}
+.stickers :nth-child(13) {
+    left: 50%;
+    top: 10%;
 }
