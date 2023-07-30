@@ -42,9 +42,9 @@ const showNotice = () => {
    setTimeout(() => {
     notice.style.opacity = 1;
    }, 100);
-//    setTimeout(() => {
-
-//    }, 3500);
+   setTimeout(() => {
+    hideNotice();
+   }, 5000);
 }
 
 const hideNotice = () => {
