@@ -8,6 +8,19 @@ const homeButtonSmall = document.getElementById("home-btn-s");
 const offPopupButton = document.getElementById("watching-mode-btn");
 const notice = document.getElementById("swipeNotice");
 
+const currentDate = new Date();
+
+const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+const day = currentDate.getDate().toString().padStart(2, '0');
+const hours = (currentDate.getHours() % 12).toString().padStart(2, '0');
+const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+const amOrPm = currentDate.getHours() >= 12 ? 'pm' : 'am';
+
+const formattedDate = `2010.${month}.${day} /\n ${hours}:${minutes} ${amOrPm}`;
+
+const dateElement = document.getElementById("date");
+dateElement.textContent = formattedDate;
+
 const moveToHome = () => {
     location.href = './index.html';
 }
