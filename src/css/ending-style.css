@@ -43,9 +43,6 @@
    display: flex;
    width: 100%;
    height: 100%;
-   /* border-radius: 40px;
-   width: var(--ending-frame-width);
-   height: var(--ending-frame-height); */
    overflow: hidden;
    align-items: center;
    justify-content: center;

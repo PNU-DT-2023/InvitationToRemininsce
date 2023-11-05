@@ -27,11 +27,15 @@
 }
 
 #background-img {
-    position: absolute;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     height: 100%;
     object-fit: cover;
     filter: blur(5px);
     z-index: -99;
+    
 }
 
 .dim-solid {
@@ -114,7 +118,7 @@ img.title {
 }
 .deco-text {
     align-self: start;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: 'lora',serif;
     max-width: 60%;
     padding: 2vw;
@@ -132,7 +136,7 @@ img.title {
 }
 .loading-message p{
     font-family: 'NeoDunggeunmo';
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     text-align: center;
 }
 
@@ -158,19 +162,16 @@ img.title {
     background: #ffffff;
     align-items: center;
     width: 0%;
+    transition: width .3s;
 }
 
 .loading-bar .line-box .line.loading-start {
-    animation: loading 6s forwards ease-in;
+    /* animation: loading 6s forwards ease-in;  */
 }
 
 @keyframes loading {
-    /* 기존 스타일 유지 */
     0% {
         width: 0%;
-    }
-    100% {
-        width: 100%;
     }
     100% {
         width: 100%;
@@ -181,7 +182,7 @@ img.title {
     width: 30%;
     display: none;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 2rem;
     flex-direction: column;
     align-items: center;
     position: absolute;
