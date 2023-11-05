@@ -95,6 +95,8 @@ imgPast.addEventListener('load', async function () {
       
       pieceWrap.id = 'piece' + pieceNum;
       pieceWrap.className = 'puzzle-piece';
+      pieceWrap.style.top = (window.innerHeight - pieceHeight - keyHeight) / 2 + 'px';
+      pieceWrap.style.left = (window.innerWidth - pieceWidth - keyWidth) / 2 + 'px';
       var pieceInner = document.createElement('div');
       pieceInner.className = 'puzzle-piece-inner';
       pieceInner.style.width = pieceWidth + keyWidth + 'px';
@@ -249,37 +251,61 @@ imgPast.addEventListener('load', async function () {
   }
 
   //퍼즐조각 랜덤 위치에 배치
-  //너무 화면 바깥에 나가지 않도록
-  //사진을 너무 가리지 않도록
-  function shufflePieces() {
-    puzzlePieces.forEach(function (piece) {
-      var shuffleOffsetX = pieceWidth / 2;
-      var shuffleOffsetY = pieceHeight / 2;
-      var topOffset = 50;
-      var randX, randY;
-      var isInside = true;
+async function movePiece(piece, newX, newY) {
+  var shuffleOffsetX = pieceWidth / 2;
+  var shuffleOffsetY = pieceHeight / 2;
+  var startX = parseFloat(piece.style.left) + shuffleOffsetX;
+  var startY = parseFloat(piece.style.top) + shuffleOffsetY;
+  var duration = 1000;
 
-      var centerX = window.innerWidth / 2;
-      var rectWidth = width*0.7;
-  
-      while (isInside) {
-        randX = Math.floor(Math.random() * (window.innerWidth - shuffleOffsetX));
-        randY = Math.floor(Math.random() * (window.innerHeight - shuffleOffsetY));
-  
-        if (
-          randX >= centerX - rectWidth / 2 && randX <= centerX - shuffleOffsetX + rectWidth / 2 
-        ) {
-          continue;
-        }
+  return new Promise(function(resolve) {
+    var startTime = null;
 
-        isInside = false;
+    function animate(time) {
+      if (!startTime) startTime = time;
+      var progress = (time - startTime) / duration;
+      if (progress > 1) progress = 1;
+
+      var currentX = startX + (newX - startX) * progress;
+      var currentY = startY + (newY - startY) * progress;
+
+      piece.style.left = currentX - shuffleOffsetX + 'px';
+      piece.style.top = currentY - shuffleOffsetY + 'px';
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        resolve();
       }
+    }
 
-      piece.style.left = randX - shuffleOffsetX + 'px';
-      piece.style.top = randY + 'px';
+    requestAnimationFrame(animate);
+  });
+}
 
-    });
-  }
+function waitOneSecond() {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, 500);
+  });
+}
+
+async function shufflePieces() {
+  var centerX = window.innerWidth / 2;
+  var rectWidth = width * 0.7;
+
+  await waitOneSecond();
+
+  await Promise.all(puzzlePieces.map(async function(piece) {
+    var randX, randY;
+
+    do {
+      randX = Math.floor(Math.random() * (window.innerWidth - pieceWidth / 2));
+      randY = Math.floor(Math.random() * (window.innerHeight - pieceHeight / 2));
+    } while (randX >= centerX - rectWidth / 2 && randX <= centerX + rectWidth / 2);
+
+    await movePiece(piece, randX, randY);
+  }));
+}
 
   //개발자용 마법버튼
   //누르고 퍼즐판 한번 클릭하면 완성한거랑 같은 효과

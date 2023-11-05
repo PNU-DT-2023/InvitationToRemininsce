@@ -1,0 +1,8 @@
+{
+    "name": "Invitation to Reminiscence",
+    "short_name": "추억으로의 초대",
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "background_color": "#000000",
+    "theme_color": "#000000"
+}
