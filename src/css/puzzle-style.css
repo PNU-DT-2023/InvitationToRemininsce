@@ -70,6 +70,11 @@ html, body{
     transform: translate(-50%, -50%);
 }
 
+#puzzle-guide {
+    height: 100%;
+    width: 100%;
+}
+
 /* 퍼즐조각들이 돌아다닐 공간(화면크기) */
 #puzzle {
     position: fixed;
@@ -167,9 +172,7 @@ html, body{
     position: absolute;
     width: 100px;
     height: 100px;
-    outline: 1px solid #000;
 }
-
 
 /* --- 진행도 표시 --- */
 #progress-container {
