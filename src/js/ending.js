@@ -3,6 +3,8 @@ import { init, animate, update } from './viewer.js'
 const frame = document.querySelector('.content-wrapper');
 const ui = document.querySelector('.ui-wrapper');
 
+let inactivityTimer;
+
 const homeButton = document.getElementById("home-btn");
 const homeButtonSmall = document.getElementById("home-btn-s");
 const offPopupButton = document.getElementById("watching-mode-btn");
@@ -21,6 +23,11 @@ const formattedDate = `2010.${month}.${day} /\n ${hours}:${minutes} ${amOrPm}`;
 const dateElement = document.getElementById("date");
 dateElement.textContent = formattedDate;
 
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(moveToHome, 60000);
+}
+
 const moveToHome = () => {
     location.href = './index.html';
 }
@@ -37,6 +44,12 @@ const watchingMode = () => {
     const container = document.querySelector('.container');
     container.addEventListener('click',hideNotice);
     container.addEventListener('touch',hideNotice);
+
+    resetInactivityTimer();
+    document.addEventListener('mousemove', resetInactivityTimer);
+    document.addEventListener('keypress', resetInactivityTimer);
+    document.addEventListener('touchstart', resetInactivityTimer);
+    document.addEventListener('touchmove', resetInactivityTimer);
 }
 
 const startEnding = () => {
