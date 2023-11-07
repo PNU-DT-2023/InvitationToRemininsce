@@ -195,7 +195,7 @@ imgPast.addEventListener('load', async function () {
       //모든 퍼즐 조각이 완성 (mouseup에서 판정)
       //메시지 띄우기(임시)
       if (completed.size == puzzlePieces.length) {
-        loadingIcon.style.display = 'none';
+        // loadingIcon.style.display = 'none';
         document.getElementById('puzzle-complete').setAttribute("class", "active");
         document.getElementById('progress-message').textContent = '추억 로딩 완료!';
         progressNum.textContent = '';

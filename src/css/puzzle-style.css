@@ -234,12 +234,14 @@ html, body{
     font-size: 20pt;
     padding-block: 8px;
     padding-inline: 12px;
-    background-color: #fff;
-    border: 1px solid #000;
+    background-color: transparent;
+    border: 1px solid transparent;
     border-radius: 100px;
 }
 
 #puzzle-solve:active {
+    width: 50px;
+    height: 100px;
     color: #fff;
     background-color: #000;
 }
