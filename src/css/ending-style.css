@@ -232,15 +232,19 @@ button#watching-mode-btn:hover {
 #home-btn-s {
    display: none;
    position: fixed;
-   top: 20px;
-   right: 20px;
+   transform: scale(1.5);
+   top: 70px;
+   right: 70px;
+   /* width: 100px;
+   height: 100px; */
    transition: .1s;
+   z-index: 999;
 }
 #home-btn-s.show {
    display: block;
 }
 #home-btn-s.show :hover {
-   transform: scale(1.1);
+   transform: scale(1.8);
 }
 
 #image-now-bg{
