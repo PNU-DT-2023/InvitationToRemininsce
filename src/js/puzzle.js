@@ -31,6 +31,7 @@ var pieceRow = 4;
 var pieceColumn = 3;
 
 var solveButton = document.getElementById('puzzle-solve');
+var resetButton = document.getElementById('restart-button');
 var progressNum = document.getElementById('progress-text');
 var backgroundImage = document.querySelector('#image-now-bg img');
 
@@ -215,6 +216,9 @@ imgPast.addEventListener('load', async function () {
   });
 
   solveButton.addEventListener("click", solvePuzzle);
+  resetButton.addEventListener("click", restartPuzzle);
+  solveButton.addEventListener("touchstart", solvePuzzle);
+  resetButton.addEventListener("touchstart", restartPuzzle);
 
 
 
@@ -305,6 +309,16 @@ async function shufflePieces() {
 
     await movePiece(piece, randX, randY);
   }));
+}
+
+function restartPuzzle(){
+  completed.clear();
+  shufflePieces();
+  puzzlePieces.forEach(function (piece, idx) {
+    piece.style.cursor = 'pointer';
+    piece.classList.remove("rightplace");
+  });
+  backgroundImage.style.opacity = 0;
 }
 
   //개발자용 마법버튼
